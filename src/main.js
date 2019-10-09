@@ -42,25 +42,25 @@ import Mock from './mock' // 刚刚手写的mock.js文件
 import axios from 'axios' // axios http请求库
 
 import {
-  // AlertPlugin,
-  // ToastPlugin,
-  // LoadingPlugin,
-  // Flexbox,
-  // FlexboxItem,
-  // XButton,
-  // XSwitch,
-  // XInput,
-  // Toast,
-  // Group,
-  // AjaxPlugin
-  // WechatPlugin,
-  // DatetimePlugin,
-  // PopupPicker,
-  // XAddress,
-  // TransferDom,
-  // Radio
+// AlertPlugin,
+// ToastPlugin,
+// LoadingPlugin,
+// Flexbox,
+// FlexboxItem,
+// XButton,
+// XSwitch,
+// XInput,
+// Toast,
+// Group,
+// AjaxPlugin
+// WechatPlugin,
+// DatetimePlugin,
+// PopupPicker,
+// XAddress,
+// TransferDom,
+// Radio
 } from 'vux' // 针对这种写法必须引入 vux-loader
-//官网地址：vux-loader https://doc.vux.li/zh-CN/vux-loader/install.html
+// 官网地址：vux-loader https://doc.vux.li/zh-CN/vux-loader/install.html
 // Vue.use(AlertPlugin)
 // Vue.use(ToastPlugin)
 // Vue.use(LoadingPlugin)

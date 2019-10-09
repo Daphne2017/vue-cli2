@@ -1,6 +1,7 @@
 <template>
   <div class="tipsBox">
   dsyhfshsadoikfhsaodfjlsa;dkf;jlsa;df
+  看不见我拉阿拉
   </div>
 </template>
 
