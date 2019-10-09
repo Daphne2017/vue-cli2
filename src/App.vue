@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <img src="./assets/logo.png">
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive">
         <!-- 这里是会被缓存的视图组件 -->
