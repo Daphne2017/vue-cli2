@@ -91,6 +91,7 @@ import Qs from 'qs'
 
 // https://www.wandouip.com/t5i78133/ 解决白屏 解决白屏（vue） - webpace es6转es5
 // https://blog.csdn.net/roamingcode/article/details/81975858
+// 对babel-transform-runtime，babel-polyfill的一些理解https://www.jianshu.com/p/7bc7b0fadfc2
 import {
   AlertPlugin,
   ToastPlugin,
