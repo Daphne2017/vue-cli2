@@ -18,6 +18,11 @@ export default {
       this.$http.get('http://mockjs.com/api/posts').then(res => {
         console.log('输出模拟的数据了', res)
       })
+      let deptData = {
+        name: '严燕姗'
+      }
+      let _deptData = Object.assign({}, deptData)
+      console.log('严燕姗严燕姗严燕姗', _deptData)
     },
     // 请求的是代理的url
     getProxyData1 () {

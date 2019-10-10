@@ -95,15 +95,16 @@ let webpackConfig = {
     child_process: 'empty'
   }
 }
-//
+// 官网安装使用教程：https://doc.vux.li/zh-CN/vux-loader/install.html
+// vux 插件的用法
 module.exports = vuxLoader.merge(webpackConfig, {
   plugins: [
     'vux-ui',
     'progress-bar',
-    // {
-    //   name: 'less-theme',
-    //   path: 'src/css/theme.less'
-    // },
+    {
+      name: 'less-theme',
+      path: 'src/css/theme.less'
+    },
     {
       name: 'duplicate-style',
       options: {

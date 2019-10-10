@@ -1,3 +1,5 @@
+// mock数据的使用 https://my.oschina.net/tongjh/blog/2999834
+// https://www.jianshu.com/p/aea89b5e6d33
 const Mock = require('mockjs') // 获取mock对象
 const Random = Mock.Random // 获取random对象，随机生成各种数据，具体请翻阅文档
 const domain = 'http://mockjs.com/api' // 定义默认域名，随便写

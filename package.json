@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "vuecli2",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "yys <2190907815@qq.com>",
@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "mockjs": "^1.0.1-beta3",
+    "qs": "^6.9.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vux": "^2.9.4"
