@@ -36,13 +36,8 @@
 //   同一个插件多次使用Vue.use()也只会被运行一次.
 // Vue.prototype.$xx其实只不过是js中构造函数的显式原型的特性罢了:
 //  构造函数的显式原型的属性 / 方法, 在函数实例化后, 可以在任意实例上读取
-import Vue from 'vue'
-import App from './App'
-import router from './router'
-import Mock from './mock' // 刚刚手写的mock.js文件
 
-import axios from 'axios' // axios http请求库 //需要注意的是axios是基于Promise的，因此如果你需要兼容低版本浏览器(caniuse)，需要引入polyfill。
-import Qs from 'qs'
+
 
 // 版本要求
 // AjaxPlugin在vux@^ 2.1.0 - rc.20开始支持
@@ -91,7 +86,36 @@ import Qs from 'qs'
 
 // https://www.wandouip.com/t5i78133/ 解决白屏 解决白屏（vue） - webpace es6转es5
 // https://blog.csdn.net/roamingcode/article/details/81975858
-// 对babel-transform-runtime，babel-polyfill的一些理解https://www.jianshu.com/p/7bc7b0fadfc2
+// 对babel-transform-runtime，babel-polyfill的一些理解于区别 https://www.jianshu.com/p/7bc7b0fadfc2
+// babel 编译时只转换语法，几乎可以编译所有时新的 JavaScript 语法，但并不会转化BOM里面不兼容的API
+// 比如 Promise, Set, Symbol, Array.from, async 等等的一些API
+// 这时候就需要 polyfill 来转转化这些API
+// babel polyfill 有三种：
+//   * babel - runtime
+//   * babel - plugin - transform - runtime
+//   * babel - polyfill
+
+// 为何 webpack + babel + transform - runtime, IE下提示Promise未定义？？？？
+// 当使用了webpack的异步加载时，webpack要求原生支持Promise，刚好我们的代码有用到。至此，原因就找到了：
+// webpack生成的new Promise相关代码, 超出babel的transform - runtime的控制范围，只有导出全局的Promise才能解决此问题
+// 解决方案1
+//    引入babel - polyfill导出全局Promise，这种方法并不好；不仅Promise被导出，还抛出大量其他的全局对象，可能存在冲突风险，同时文件体积比较大。
+// 解决方案2
+//  在js文件开头添加window.Promise = Promise这一句即可，示例代码：
+//  import 'jquery'
+//  import 'bootstrap/dist/css/bootstrap.css'
+//  import 'bootstrap'
+//  将Promise抛出为全局对象
+//  window.Promise = Promise
+// 原理：当babel检查到js的Promise时，transform - runtime会将Promise做转换，然后将其抛出为全局对象即可达到跟babel - polyfill一样的效果。
+// 连接：https://www.cnblogs.com/pheye/p/7659910.html
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import Mock from './mock' // 刚刚手写的mock.js文件
+
+import axios from 'axios' // axios http请求库 //需要注意的是axios是基于Promise的，因此如果你需要兼容低版本浏览器(caniuse)，需要引入polyfill。
+import Qs from 'qs'
 import {
   AlertPlugin,
   ToastPlugin,
@@ -103,7 +127,7 @@ import {
   XInput,
   Toast,
   Group,
-  // AjaxPlugin, // 暂时不使用vue的Ajax插件
+  // AjaxPlugin, // 暂时不使用vue的Ajax插件，使用axios插件
   WechatPlugin,
   DatetimePlugin,
   PopupPicker,
@@ -111,7 +135,10 @@ import {
   TransferDom,
   Radio
 } from 'vux' // 针对这种写法必须引入 vux-loader
+
 // 官网地址：vux-loader https://doc.vux.li/zh-CN/vux-loader/install.html
+// window.Promise = Promise  // 采用require('es6-promise').polyfill()
+require('es6-promise').polyfill()
 Vue.use(AlertPlugin)
 Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
@@ -133,7 +160,7 @@ Vue.directive('transfer-dom', TransferDom)
 Vue.config.productionTip = false
 
 // axios.defaults.baseURL = 'http://mockjs.com/api' // 设置默认请求的url
-Vue.prototype.$http = axios // //把 `axios` 加到 `Vue` 的原型中，在组件上可以直接使用this.$http访问替代 axios
+Vue.prototype.$http = axios // //把 `axios` 加到 `Vue` 的原型中，在组件上可以直接使用this.$http访问替代 axios，
 Vue.prototype.$qs = Qs
 /* eslint-disable no-new */
 new Vue({

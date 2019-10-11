@@ -1,0 +1,176 @@
+@primaryColor: #2979D0; //主色值
+@activeColor: #2979D0; //激活状态的色值
+@swiper-indicator-active-color: #2979D0;
+@tab-text-active-color: #2979D0;
+@tab-bar-active-color: #2979D0;
+@search-cancel-font-color: #2979D0;
+//日历前进后退颜色
+@calendar-arrow-color: #2979D0;
+//选中时的背景颜色
+@calendar-selected-bg-color: #2979D0;
+//单元格的字号
+@calendar-date-item-font-size: 14px;
+//日历当天颜色
+@calendar-today-font-color: #2979D0;
+//datetime 确定
+@datetime-header-item-confirm-font-color: #2979D0;
+@radio-checked-icon-color: #2979D0;
+@popup-header-right-text-color: #2979D0;
+//按钮颜色
+@button-default-bg-color: #ffffff;
+@button-primary-bg-color: #2979D0;
+@button-primary-active-bg-color: #2979D0;
+@button-primary-disabled-bg-color: #bacee6;
+//按钮字体
+@button-mini-font-size: 15px;
+@button-global-font-size: 18px;
+//文字按钮
+.word-button{
+  height:24px;
+  font-size:17px;
+  font-weight:400;
+  line-height:24px;
+}
+// switch
+
+@switch-checked-bg-color: #2979D0;
+@switch-checked-border-color: #2979D0;
+
+@tabbar-text-active-color: #2979D0;
+
+/deep/.vux-tab .vux-tab-item.vux-tab-selected {
+  color: #333
+}
+
+//全局统一风格颜色
+@both-style-color: #2979D0;
+//按钮不可点击颜色
+@btn-unclick-color: #A6C5E5;
+/*tab*/
+@tab-text-active-color: #2979D0;
+@tab-bar-active-color: #2979D0;
+
+// 重写vux search 的背景颜色
+@search-bg-color: #fafafa;
+// 重写vux number buttom 的加减符号颜色
+@number-button-font-color: #2979D0;
+
+/*  */
+@alert-tit-width: 280px;
+@alert-content-color: #888888;
+@alert-btn-color: #2979d0;
+@alert-tit-fz: 18px;
+@alert-btn-fz: 18px;
+
+//
+.weui-dialog {
+  width: @alert-tit-width;
+
+  .weui-dialog__hd {
+    padding-top: 25px;
+
+    .weui-dialog__title {
+      font-size: @alert-tit-fz;
+    }
+  }
+
+  .weui-dialog__bd {
+    color: @alert-content-color;
+    min-height: 35px;
+  }
+
+  .weui-dialog__ft {
+    color: @alert-btn-color;
+    font-size: @alert-btn-fz;
+
+    .weui-dialog__btn_primary {
+      color: @alert-btn-color;
+      font-size: @alert-btn-fz;
+    }
+  }
+}
+
+.vux-toast {
+  .weui-toast.weui-toast_text.vux-toast-middle {
+    min-width: 212px;
+    border-radius: 3px;
+  }
+  .weui-toast_cancel .weui-icon_toast::before {
+    content: 1;
+    background-image: url(../assets/icon/toast_cancel.png);
+    display: block;
+    text-indent: -999px;
+    width: 36px;
+    height: 36px;
+    background-size: 100%;
+    margin-bottom: 9px;
+    margin-top: 10px;
+  }
+
+  .weui-toast_forbidden {
+    color: #fff;
+
+    .weui-icon_toast.weui-icon-success-no-circle::before {
+      content: 1;
+      background-image: url(../assets/icon/toast_warn.png);
+      display: block;
+      text-indent: -999px;
+      width: 44px;
+      height: 44px;
+      background-size: 100%;
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+  }
+}
+// PopupPicker 取消颜色
+@popup-header-left-text-color: #2979D0;
+// PopupPicker datetime 取消颜色
+@datetime-header-item-cancel-font-color: #2979D0;
+
+// 重写多选列表checkList的颜色
+@checklist-icon-active-color: #2979D0;
+
+// 重写@buttonTab组件颜色
+@button-tab-border-radius:8px;
+@button-tab-border-color: #2979D0;
+@button-tab-default-border-color: #2979D0;
+@button-tab-active-background-color: #2979D0;
+@button-tab-active-border-color:#2979D0;
+/deep/.vux-button-group > a.vux-button-group-current {
+  border-radius: 5px;
+}
+// search 搜索框取消颜色
+@search-cancel-font-color: #2979D0;
+@search-bg-color: #fff;
+@search-placeholder-font-color: #E6E6EA;
+/deep/.weui-search-bar {
+  background-color: #FAFAFA;
+}
+// 重写步计器样式
+@number-button-font-color: #000000;
+@number-round-button-enabled-border-color:#000000;
+// 自定义步进器样式
+.custom-x-number{
+  height: 44px;
+  /deep/.vux-number-selector{
+    padding: 14px 16px 2px;
+    border-top: none;
+    border-bottom: none;
+    height: 44px;
+    &.vux-number-selector-plus {
+      margin-right: 0;
+    }
+  }
+  /deep/.vux-number-input{
+    border-top: none;
+    border-bottom: none; 
+    height: 44px;
+    font-size: 17px;
+  }
+  /deep/.vux-cell-primary{
+    > div{
+      margin-right: -21px;
+    }
+  }
+}
