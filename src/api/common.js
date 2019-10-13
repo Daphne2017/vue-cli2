@@ -10,7 +10,7 @@ let prefixUrl
 
 if (process.env.NODE_ENV === 'production') {
   // 正式环境
-  prefixUrl = '/djyuatzwwx/api' // UAT
+  prefixUrl = '' // UAT
 } else {
   // 本地环境接口前缀
   prefixUrl = '/api' // SIT

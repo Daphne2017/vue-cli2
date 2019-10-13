@@ -18,7 +18,6 @@ const postData = req => {
       author: Random.cname(), // 随机生成名字
       date: Random.date() + ' ' + Random.time() // 随机生成年月日 + 时间
     }
-
     posts.push(post)
   }
 

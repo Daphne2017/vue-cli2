@@ -1,6 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <header class="commonHead">
+      <img src="./assets/logo.png">
+      <h2>vue-cli</h2>   
+    <div>
+      路由连接：
+      <ul >
+        <router-link class="link-item"
+          :to="`/demo/${item.link}`"
+          tag="li" v-for="(item, index) of linklist" :key="index">
+          <span>{{item.name}}</span>
+        </router-link>
+      </ul>
+    </div>         
+    </header>
+
+
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive">
         <!-- 这里是会被缓存的视图组件 -->
@@ -15,6 +30,29 @@
 <script>
 export default {
   name: 'app',
+  data () {
+    return {
+      linklist: [
+        {
+          link: 'mock',
+          name: 'mock的demo'
+        },
+        {
+          link: 'proxyTable',
+          name: 'proxyTable的demo'
+        },
+        {
+          link: 'qsPlugin',
+          name: 'qsPlugin的demo'
+        },
+        {
+          link:'quillEditor',
+          name: '富文本编辑器的使用'
+          
+        }
+      ]
+    }
+  },
   mounted: function () {}
 }
 </script>
@@ -29,6 +67,14 @@ export default {
       background-color: #fff;
       width:100%;
       height:100%;
+      .commonHead{
+        text-align: center;
+        .link-item{
+          color:#2979D0;
+          font-size: 16px;
+        }        
+      }
+
     }
   }
   html,body{
@@ -37,11 +83,6 @@ export default {
     // overflow: hidden;
   }
 
-  .noListContentTips{
-    padding: 15px 0;
-    text-align: center;
-    font-size: 12px;
-    color: #999;
-  }
+
 
 </style>

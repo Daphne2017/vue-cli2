@@ -135,7 +135,11 @@ import {
   TransferDom,
   Radio
 } from 'vux' // 针对这种写法必须引入 vux-loader
-
+// 富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 // 官网地址：vux-loader https://doc.vux.li/zh-CN/vux-loader/install.html
 // window.Promise = Promise  // 采用require('es6-promise').polyfill()
 require('es6-promise').polyfill()
@@ -146,6 +150,7 @@ Vue.use(LoadingPlugin)
 Vue.use(WechatPlugin)
 Vue.use(DatetimePlugin)
 Vue.use(Toast)
+Vue.use(VueQuillEditor) // 全局使用富文本编辑器 /// https://www.jianshu.com/p/1675bcd396a2
 Vue.component('flexbox', Flexbox)
 Vue.component('flexbox-item', FlexboxItem)
 Vue.component('x-button', XButton)
@@ -161,7 +166,8 @@ Vue.config.productionTip = false
 
 // axios.defaults.baseURL = 'http://mockjs.com/api' // 设置默认请求的url
 Vue.prototype.$http = axios // //把 `axios` 加到 `Vue` 的原型中，在组件上可以直接使用this.$http访问替代 axios，
-Vue.prototype.$qs = Qs
+Vue.prototype.$qs = Qs   // 添加qs到vue的显式原型上，通过this.$http.qs来使用
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

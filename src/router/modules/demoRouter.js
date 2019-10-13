@@ -11,29 +11,37 @@ export default [
     },
     children: [
       {
-        path: '',
-        name: 'home',
-        component: resolve => require(['@/views/vueCliDemo/home'], resolve),
+        path: 'mock',
+        name: 'mock',
+        component: resolve => require(['@/views/vueCliDemo/mock'], resolve),
         meta: {
-          title: '主页'
+          title: 'mock的demo'
         }
       },
       {
-        path: 'webpackTest',
-        name: 'webpackTest',
-        component: resolve => require(['@/views/vueCliDemo/webpackTest'], resolve),
+        path: 'proxyTable',
+        name: 'proxyTable',
+        component: resolve => require(['@/views/vueCliDemo/proxyTable'], resolve),
         meta: {
-          title: 'webpack详解'
+          title: 'webpack的proxyTable的代理使用'
         }
       },
       {
-        path: 'bableTest',
-        name: 'bableTest',
-        component: resolve => require(['@/views/vueCliDemo/bableTest'], resolve),
+        path: 'qsPlugin',
+        name: 'qsPlugin',
+        component: resolve => require(['@/views/vueCliDemo/qsPlugin'], resolve),
         meta: {
-          title: 'bable使用'
+          title: 'qs插件的使用'
         }
-      }
+      },
+      {
+        path: 'quillEditor',
+        name: 'quillEditor',
+        component: resolve => require(['@/views/vueCliDemo/quillEditor'], resolve),
+        meta: {
+          title: '富文本编辑器的使用'
+        }
+      }      
     ]
   }
 ]
