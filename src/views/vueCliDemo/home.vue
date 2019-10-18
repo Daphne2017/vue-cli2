@@ -37,10 +37,10 @@ export default {
     getProxyData1 () {
       let deptData = {
         name: '严燕姗',
-        age:'27',
+        age: '27',
         height: '165',
         weight: '100'
-      }      
+      }
       this.$http.get(demoApi.getWebpack).then(res => {
         console.log('打印输出代理的数据1', res)
       })

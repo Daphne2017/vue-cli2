@@ -140,6 +140,9 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+// 引入echarts
+import echarts from 'echarts'
+
 // 官网地址：vux-loader https://doc.vux.li/zh-CN/vux-loader/install.html
 // window.Promise = Promise  // 采用require('es6-promise').polyfill()
 require('es6-promise').polyfill()
@@ -166,8 +169,8 @@ Vue.config.productionTip = false
 
 // axios.defaults.baseURL = 'http://mockjs.com/api' // 设置默认请求的url
 Vue.prototype.$http = axios // //把 `axios` 加到 `Vue` 的原型中，在组件上可以直接使用this.$http访问替代 axios，
-Vue.prototype.$qs = Qs   // 添加qs到vue的显式原型上，通过this.$http.qs来使用
-
+Vue.prototype.$qs = Qs // 添加qs到vue的显式原型上，通过this.$http.qs来使用
+Vue.prototype.$echarts = echarts //全局引入echarts
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

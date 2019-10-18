@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "echarts": "^4.4.0",
     "es6-promise": "^4.2.8",
     "mockjs": "^1.0.1-beta3",
     "qs": "^6.9.0",

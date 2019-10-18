@@ -41,7 +41,15 @@ export default [
         meta: {
           title: '富文本编辑器的使用'
         }
-      }      
+      },
+      {
+        path: 'echarts',
+        name: 'echarts',
+        component: resolve => require(['@/views/vueCliDemo/echarts'], resolve),
+        meta: {
+          title: 'echarts的使用'
+        }
+      }
     ]
   }
 ]

@@ -46,9 +46,12 @@ export default {
           name: 'qsPlugin的demo'
         },
         {
-          link:'quillEditor',
+          link: 'quillEditor',
           name: '富文本编辑器的使用'
-          
+        },
+        {
+          link: 'echarts',
+          name: 'echarts的使用'
         }
       ]
     }
