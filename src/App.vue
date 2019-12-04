@@ -2,7 +2,7 @@
   <div id="app">
     <header class="commonHead">
       <img src="./assets/logo.png">
-      <h2>vue-cli</h2>   
+      <h2>vue-cli</h2>
     <div>
       路由连接：
       <ul >
@@ -12,9 +12,8 @@
           <span>{{item.name}}</span>
         </router-link>
       </ul>
-    </div>         
+    </div>
     </header>
-
 
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive">
@@ -52,6 +51,10 @@ export default {
         {
           link: 'echarts',
           name: 'echarts的使用'
+        },
+        {
+          link: 'virtualList',
+          name: 'virtualList虚拟列表的使用'
         }
       ]
     }
@@ -75,7 +78,7 @@ export default {
         .link-item{
           color:#2979D0;
           font-size: 16px;
-        }        
+        }
       }
 
     }
@@ -85,7 +88,5 @@ export default {
     height: 100%;
     // overflow: hidden;
   }
-
-
 
 </style>

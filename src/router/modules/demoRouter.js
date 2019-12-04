@@ -49,6 +49,14 @@ export default [
         meta: {
           title: 'echarts的使用'
         }
+      },
+      {
+        path: 'virtualList',
+        name: 'virtualList',
+        component: resolve => require(['@/views/vueCliDemo/virtualList'], resolve),
+        meta: {
+          title: 'virtualList的使用'
+        }
       }
     ]
   }
