@@ -7,7 +7,7 @@
 (function () {
   // 一、数值数组
   var numArrs = [1, 1, 2, 3, 4, 5, 6, 7];
-  (function (numArrs) {
+  (function () {
     let uniqueArr = []
     for (const num of numArrs) {
       if (!uniqueArr.includes(num)) {
@@ -15,6 +15,11 @@
       }
     }
     console.log('uniqueArr0', uniqueArr)
+  })();
+
+  (function (numArrs) {
+    let uniqueArr = Array.from(new Set(numArrs))
+    console.log('uniqueArr1', uniqueArr)
   })(numArrs)
   // 二、对象数组
   var objArrs = [{ id: 'yys', name: '严燕姗' }, { id: 'zhangsan', name: '张三' }, { id: 'zhangsan', name: '张三1' }];
@@ -29,7 +34,7 @@
         obj[item.id] = 1
       }
     }
-    console.log('uniqueArr1', uniqueArr)
+    console.log('uniqueArr3', uniqueArr)
   })(objArrs);
 
   (function (objArrs) {
@@ -42,6 +47,6 @@
       return all
     }
     let uniqueArr = objArrs.reduce(reducer, [])
-    console.log('uniqueArr2', uniqueArr)
+    console.log('uniqueArr4', uniqueArr)
   })(objArrs)
 })()
