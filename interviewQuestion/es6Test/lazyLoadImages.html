@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="scrollBox">
+    <div id="contentA">
+      测试一些数据
+      测试一些数据啦
+      测试一些数据啦
+      测试一些数据
+      测试一些数据啦
+      测试一些数据啦
+      测试一些数据
+      测试一些数据啦
+      测试一些数据啦
+    </div>
+    <div id="contentB">
+      开始出现在可视区了
+    </div>
+  </div>
+</body>
+<style>
+#scrollBox{
+  background-color:aqua;
+  height: 200px;
+  width: 50px;
+  padding:20px 10px;
+  margin-top:100px;
+  border:red 30px solid;
+  position: relative;
+  overflow-y: scroll;
+  /* overflow: scroll; */
+  /* overflow: hidden; */
+}
+#contentB{
+  margin-top:10px;
+  padding-top:30px;
+}
+
+</style>
+<script>
+/* 
+  ele.clientHeight = cssHeight + 上下padding；
+  ele.offsetHeight = cssHeight + 上下padding + 上下border + 水平滚动条高度；
+  ele.offsetWidth = cssWidth + 左右padding + 左右border + 垂直滚动条宽度；
+  ele.scrollHeight = cssHeight + 上下padding + 由于overflow设置为隐藏或者scroll而不可见的内容高度 
+  ele.offsetTop = element(border) ---parent（padding边界) =>父元素要定位relative或者是absolute
+
+*/
+  // 1、当#scrollBox元素，设置为overflow：hidden结果如下：
+
+// console.log("元素scrollBox的clientHeight：",document.getElementById("scrollBox").clientHeight) // 200+40 = 240px
+// console.log("元素scrollBox的offsetHeight：",document.getElementById("scrollBox").offsetHeight) // 200+40+60 = 300px
+// console.log("元素contentA的offsetHeight：", document.getElementById("contentA").offsetHeight) // 147
+// console.log("元素contentB的offsetHeight：", document.getElementById("contentB").offsetHeight) // 93
+// console.log("元素scrollBox的scrollHeight：",document.getElementById("scrollBox").scrollHeight) // 200+40+（147+93+10 - 200） = 290，因为contentB加了margin-top：10；
+
+  // 2、当#scrollBox元素，设置为verflow-y: scroll结果如下：
+console.log("元素scrollBox的clientHeight：", document.getElementById("scrollBox").clientHeight) // 200+40 = 240px
+console.log("元素scrollBox的clientWidth：", document.getElementById("scrollBox").clientWidth) // 50-17+20 = 53
+console.log("元素scrollBox的offsetHeight：", document.getElementById("scrollBox").offsetHeight) // 200+40+60 = 300px
+console.log("元素scrollBox的offsetWidth：", document.getElementById("scrollBox").offsetWidth) // 50-17+20+60+17= 130 
+console.log("元素contentA的offsetHeight：", document.getElementById("contentA").offsetHeight) // 231 是因为垂直滚动条占了部分宽度，所以contentA的offsetHeight变大了
+console.log("元素contentA的offsetWidth：", document.getElementById("contentA").offsetWidth) // 50-17= 33 
+console.log("元素contentB的offsetHeight：", document.getElementById("contentB").offsetHeight) // 135 是因为垂直滚动条占了部分宽度，所以contentA的offsetHeight变大了
+console.log("元素contentB的offsetWidth：", document.getElementById("contentB").offsetWidth) // 50-17=33
+console.log("元素scrollBox的scrollHeight：", document.getElementById("scrollBox").scrollHeight) // 200+40+(231+135+10 - 200) = 416，因为contentB加了margin-top：10；  
+// 3、当#scrollBox元素，设置为verflow：scroll结果如下：
+  // console.log("元素scrollBox的clientHeight：", document.getElementById("scrollBox").clientHeight) // 200-17+40 = 223 // 因为水平滚动条占了部分高度，所以clientHeight变小了
+  // console.log("元素scrollBox的offsetHeight：", document.getElementById("scrollBox").offsetHeight) // 200-17+40+60 +17 = 300
+  // console.log("元素contentA的offsetHeight：", document.getElementById("contentA").offsetHeight) // 仍是231 
+  // console.log("元素contentB的offsetHeight：", document.getElementById("contentB").offsetHeight) //  仍是135
+  // console.log("元素scrollBox的scrollHeight：", document.getElementById("scrollBox").scrollHeight) // 仍是416  183+40+(231+135+10 - 183)
+
+
+  // //offsetTop是元素与offsetParent的距离，循环获取直到页面顶部
+  // function getTop(e) {
+  //   var T = e.offsetTop;
+  //   return T;
+  // }
+
+  // function lazyLoad(imgs) {
+  //   var H = document.getElementById('scrollBox').clientHeight;//获取可视区域高度
+  //   var S = document.getElementById('clientHeight').scrollTop;
+    
+  //     if (H + S > getTop(document.getElementById('scrollTop'))) {
+  //       console.log("开始出现在可视区了")
+  //     }
+    
+  // }
+
+  // window.onload = document.getElementById('scrollBox').onscroll = function () { //onscroll()在滚动条滚动的时候触发
+  //   lazyLoad(imgs);
+  // }  
+  // 懒加载
+  function lazyLoad(){
+    var clientHeight =  document.getElementById("scrollBox").clientHeight;
+    var scrollTop = document.getElementById("scrollBox").scrollTop;
+    var offsetTop = document.getElementById("contentB").offsetTop;
+    if(clientHeight+scrollTop >= offsetTop){
+      console.log('contentB我开始出现啦')
+    }
+  };
+// 是否滚动到底
+function toBottom(){
+
+  var scrollTop = document.getElementById("scrollBox").scrollTop;
+  var clientHeight = document.getElementById("scrollBox").clientHeight;
+  var scrollHeight = document.getElementById("scrollBox").scrollHeight;
+  if(scrollTop + clientHeight >= scrollHeight ){
+    console.log('已经到底啦啦啦啦')
+  } ;
+
+}
+  var canRun = true;
+  window.onload = document.getElementById("scrollBox").onscroll = function(){
+    // 节流：如果第一次scroll触发的事件还没有开始执行或者还没执行完毕，频繁触发scroll，将不会做任何操作
+     if (!canRun) {
+      return;
+    }
+    canRun = false;
+    setTimeout(() => {  
+      lazyLoad()
+      toBottom()
+      canRun = true;
+    }, 500);
+    
+  }
+</script>
+<!-- <script src="./for.js"></script> -->
+</html>

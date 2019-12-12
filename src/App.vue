@@ -55,6 +55,18 @@ export default {
         {
           link: 'virtualList',
           name: 'virtualList虚拟列表的使用'
+        },
+        {
+          link: 'lazyLoadImages',
+          name: 'lazyLoadImages图片懒加载'
+        },
+        {
+          link: 'virtualDom',
+          name: 'virtualDom的diff算法的理解，以及就地复用'
+        },
+        {
+          link: 'freezeObj',
+          name: '如何使用冻结对象'
         }
       ]
     }

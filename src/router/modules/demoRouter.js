@@ -57,6 +57,30 @@ export default [
         meta: {
           title: 'virtualList的使用'
         }
+      },
+      {
+        path: 'lazyLoadImages',
+        name: 'lazyLoadImages',
+        component: resolve => require(['@/views/vueCliDemo/lazyLoadImages'], resolve),
+        meta: {
+          title: '图片懒加载的使用'
+        }
+      },
+      {
+        path: 'virtualDom',
+        name: 'virtualDom',
+        component: resolve => require(['@/views/vueCliDemo/virtualDom'], resolve),
+        meta: {
+          title: 'virtualDom的diff算法的理解，以及就地复用'
+        }
+      },
+      {
+        path: 'freezeObj',
+        name: 'freezeObj',
+        component: resolve => require(['@/views/vueCliDemo/freezeObj'], resolve),
+        meta: {
+          title: '冻结对象'
+        }
       }
     ]
   }

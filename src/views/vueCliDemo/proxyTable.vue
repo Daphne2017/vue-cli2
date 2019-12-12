@@ -12,12 +12,12 @@ import demoApi from '@/api/demoApi'
 import { Divider } from 'vux'
 export default {
   name: 'proxyTable',
-  components:{
+  components: {
     Divider
   },
   data () {
     return {
-      htmlWebpack:'',
+      htmlWebpack: '',
       bableHtml: ''
 
     }
@@ -25,11 +25,10 @@ export default {
   methods: {
     // 请求的是代理的url
     getProxyData1 () {
-     
       this.$http.get(demoApi.getWebpack).then(res => {
         console.log('打印输出代理的数据1', res)
         this.htmlWebpack = res.data
-        console.log('htmlWebpack',this.htmlWebpack)
+        console.log('htmlWebpack', this.htmlWebpack)
       })
     },
     // 请求的是代理的url
