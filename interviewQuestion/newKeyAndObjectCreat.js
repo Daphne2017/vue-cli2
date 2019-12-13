@@ -1,4 +1,5 @@
-(function () {
+
+/* (function () {
   var arr = [1, 3, 4, 6, [7, 8, 9]]
   var copyArr = JSON.parse(JSON.stringify(arr))
   copyArr.push = function (arg) {
@@ -38,18 +39,67 @@
   console.log('新对象', copyObj)
 })()
 
-// Object.create(obj)的实质是什么？
-Object.create = function (o) {
-  function F () {
+
+(function() {
+  // Object.create(obj)的实质是什么？
+  Object.create = function (o) {
+    function F () {
+    }
+    F.prototype = o
+    return new F()
   }
-  F.prototype = o
-  return new F()
-}
-// new关键字做了些什么？
+  // new关键字做了些什么？
 
-new Array = function (Array){
-  let newObj = new Object();
-  newObj.__proto__ = Array.prototype;
-  Array.call(newObj)
+  new Array = function (Array){
+    let newObj = new Object();
+    newObj.__proto__ = Array.prototype;
+    Array.call(newObj)
 
-}
+  }
+})()
+ */
+
+ (function(){
+   (function(){
+    function F(){
+      this.age =15;
+      this.name = "yys";
+      this.parent = {age:55,name:"luo"};
+    }
+ 
+    let obj = new F();
+    console.log(obj);
+   })();
+
+   (function(){
+    function F(){
+      this.age =15;
+      this.name = "yys";
+      this.parent = {age:55,name:"luo"};
+    }
+ 
+    let obj = new Object();
+    // obj[[prototype]] = F.prototype;
+    F.call(obj)
+    console.log(obj);
+   })();
+
+  
+   function Father(){
+    this.name = "yys";
+    this.age = 50;
+  }
+  Father.prototype.sayName = function() {
+      console.log(this.name)
+  }
+  function Child(){
+    this.myname = 'www';
+  }
+  var b = new Father(); 
+  Child.prototype = b;
+  var a = new Child()
+  // a.age;
+  console.log('a',a)
+  console.log("a.age",a.age)
+  console.log('b',b)
+ })()
