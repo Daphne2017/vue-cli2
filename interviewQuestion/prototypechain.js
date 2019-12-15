@@ -1,6 +1,6 @@
 // 原型链的那些事？
-
-isPrototypeOf?干嘛用的？
+// Object.getPrototypeOf函数获得一个对象的[[prototype]]
+// isPrototypeOf?干嘛用的？
 
 function F() {
 
