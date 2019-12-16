@@ -16,13 +16,13 @@
 
 })() */
 // (function(){
-  // 解构赋值
-/*   
+// 解构赋值
+/*
   1。什么是解构？
   解构赋值语法是JavaScript的一种表达方式，可以方便的从数组或者对象中快速的提取赋值给定义的变量。
   一、快速获取数组中的值
   1。从数组中获取值并赋值到变量中，变量中的顺序和数组中对象的顺序对应。 */
-  /*
+/*
   var foo = ["one", "two", "three", "four"];
   var [one, two, three, four] = foo;//对数组foo进行结构
 
@@ -54,7 +54,7 @@
 /*   二、获取对象的值
 
   1.解构对象中的属性值到对应的变量中。 */
- /*  const student = {
+/*  const student = {
     name：“ming”，
     age：“18”，
     city：“shanghai”
@@ -91,7 +91,6 @@
   console.log({ ...others })//{age:"18",city:"shanghai"};
   //在构造对象时，会将对象表达式按照key-value的方式展开，属于浅复制一个对象。
 
-
   2。什么是拓展运算符？
   一、数组的扩展运算符
   1。数组的扩展运算符用于将一个数组转为用逗号分隔的参数序列。
@@ -102,8 +101,6 @@
   const a1 = [1, 2];
   const a2 = [...a1]; //a2是一个新的数组，实际上是浅复制数组a1;
   const [...a2] = a1;//a2是也是一个数组，是a1的浅复制。
-
-
 
   3。合并数组，合并arr1，arr2，arr3
   [...arr1,...arr2,...arr3];
@@ -118,7 +115,6 @@
   let obj = { a: 3, b: 4 };
   let newObj = { ...obj }; //浅拷贝一个对象
 
-
   2。过滤对象某些不需要的属性。
   var student = {
     name："Ming",
@@ -128,23 +124,21 @@
 
   var { name, ...other } = student;
   //other是一个对象，相当于student目标对象将自身可遍历的，但尚未读取的属性，
-  //分配到指定的对象上面，所有的键和它们的值，都会拷贝到新对象上面。 
+  //分配到指定的对象上面，所有的键和它们的值，都会拷贝到新对象上面。
   console.log(...studnet);//出错，没有部署遍历器接口
  */
 
-
-
-  // var foo = ["one", "two", "three", "four"];
-  // // var foo = [];
-  // // var [,...rest] = foo;
-  // // console.log('rest',rest)
-  // var [first='0',,,,...rest]= foo //设置默认值
-  // console.log('first', first)
-  // console.log('rest', rest)
-  // const { name = "hong", age = "15" } = {};
-  // console.log(name);
-  // console.log(age);
-/* 
+// var foo = ["one", "two", "three", "four"];
+// // var foo = [];
+// // var [,...rest] = foo;
+// // console.log('rest',rest)
+// var [first='0',,,,...rest]= foo //设置默认值
+// console.log('first', first)
+// console.log('rest', rest)
+// const { name = "hong", age = "15" } = {};
+// console.log(name);
+// console.log(age);
+/*
   let obj = { hello: 'hello', world: 'world' };
   let { hello, world} = obj
   console.log('hello:',hello,'word:',world)
@@ -191,7 +185,6 @@ console.log('name:', name, "arr:", arr, 'objinner:', objinner, 'innerName:', inn
 
 // console.log(`foo ${fn()} bar`)
 
-
 // const library1property = Symbol("lib1");
 // function lib1tag(obj) {
 //   obj[library1property] = 42;
@@ -202,21 +195,73 @@ console.log('name:', name, "arr:", arr, 'objinner:', objinner, 'innerName:', inn
 // }
 // // foo Hello World bar
 // // })()
-function test(a, b) {
-  console.log(a); // undifined
-  console.log(b); // undifined
-  var b = 234;
-  console.log(b); // 234
-  a = 123;
-  console.log(a); // 123
-  function a() { }
-  var a;
-  b = 234;
-  var b = function () { }
-  console.log(a);  // 123
-  console.log(b); // function b(){}
-}
-test(1);
 
-var a; console.log(a); function a() { console.log("ddddddd") }
-var a; console.log('iii', a); a = 5; function a() { console.log("ddddddd") } a();
+//
+(function () {
+  // 函数参数的解构赋值
+  function myTest ({ name = 'yys', age = 26 } = {}) { // 调用函数的时候，没传的话，默认是传{}
+    console.log('name:', name, 'age:', age)
+  }
+  myTest({ name: 'weizhichang', age: 25 }) // name: weizhichang age: 25
+  myTest({}) // name: yys age: 26
+  myTest() // name: yys age: 26
+
+  function myTest1 ({ name, age } = { name: 'yys', age: 26 }) { // 调用函数的时候，没传的话，默认是传{name: 'yys', age: 26}
+    console.log('name', name, 'age', age)
+  }
+  myTest1()// name yys age 26
+  myTest1({}) // name undefined age undefined // 传了参数，但是没对解构的name，和age赋默认值，所以是undefined
+
+  function add ([x, ...y]) {
+    return x + y
+  }
+  add([1, 2, 3, 4, 5]) //
+
+  function foo (a = 100, b = 200, ...args) {
+    console.log('a', a) // 1
+    console.log('b', b) // 2
+    console.log('args', args) // [3,4,5,6]
+    return args
+  }
+  foo(1, 2, 3, 4, 5, 6)
+
+  function fn () {
+    return 'Hello World'
+  }
+  console.log(`foo ${fn()} bar`)
+
+  // ES6的写法
+  function f (x, y, z) {
+    // ...
+  }
+  let args = [0, 1, 2]
+  f(...args)
+})();
+
+(function () {
+  // 函数默认参数
+  function A (a, b = 1) {
+    console.log(a + b)
+  }
+  A(1) // 2
+  A(2 + 3) // 5
+})()
+
+// function test (a, b) {
+//   console.log(a) // undifined
+//   console.log(b) // undifined
+//   var b = 234
+//   console.log(b) // 234
+//   a = 123
+//   console.log(a) // 123
+//   function a () { }
+//   var a
+//   b = 234
+//   var b = function () { }
+//   console.log(a) // 123
+//   console.log(b) // function b(){}
+// }
+// test(1)
+
+// var a; console.log(a); function a () { console.log('ddddddd') }
+// var a; console.log('iii', a); a = 5; function a () { console.log('ddddddd') } a()

@@ -41,7 +41,7 @@
 })()
 */
 
-(function() {
+(function () {
   // Object.create(obj)的实质是什么？
 /*   Object.create = function (o) {
     function F () {
@@ -60,34 +60,32 @@
   } */
 
   function Car () {
-      this.color = "red";
+    this.color = 'red'
   }
-  Car.prototype.sayHi=function(){
+  Car.prototype.sayHi = function () {
     console.log('你好')
   }
-  var car = new Car();
+  var car = new Car()
 
-  console.log("car",car)    //
-  console.log("car.color",car.color)    //
-  console.log("car.sayHi()",car.sayHi()) 
-  var car2 =  Object.create(Car);
-  console.log(car2.color)    //undefined
-  // console.log(car2.sayHi()) 
+  console.log('car', car) //
+  console.log('car.color', car.color) //
+  console.log('car.sayHi()', car.sayHi())
+  var car2 = Object.create(Car)
+  console.log(car2.color) // undefined
+  // console.log(car2.sayHi())
   // 例如：
   var Base = function () {
   //     this.a = 2
 
   }
-  Base.a = "看看是否会输出来"
-  Base.prototype.a = 3;
-  var o1 = new Base();
-  var o2 = Object.create(Base);
-  console.log("o1",o1); //
-  console.log("o1.a",o1.a); //3
-  console.log('ffff',o2.a); //ffff 看看是否会输出来
-
-})()
-
+  Base.a = '看看是否会输出来'
+  Base.prototype.a = 3
+  var o1 = new Base()
+  var o2 = Object.create(Base)
+  console.log('o1', o1) //
+  console.log('o1.a', o1.a) // 3
+  console.log('ffff', o2.a) // ffff 看看是否会输出来
+})();
 
 //  (function(){
 //    (function(){
@@ -114,23 +112,23 @@
 //    })();
 //  })()
 
-   (function(){
-    function Father(){
-      this.name = "yys";
-      this.age = 50;
-    }
-    Father.prototype.sayName = function() {
-        console.log(this.name)
-    }
-    function Child(){
-      this.myname = 'www';
-    }
-    var b = new Father(); 
-    Child.prototype = b;
-    var a = new Child()
-    // a.age;
-    console.log('a',a)
-    console.log("a.age",a.age)
-    console.log("a.sayname",a.sayName())
-    console.log('b',b)
-   })()
+(function () {
+  function Father () {
+    this.name = 'yys'
+    this.age = 50
+  }
+  Father.prototype.sayName = function () {
+    console.log(this.name)
+  }
+  function Child () {
+    this.myname = 'www'
+  }
+  var b = new Father()
+  Child.prototype = b
+  var a = new Child()
+  // a.age;
+  console.log('a', a)
+  console.log('a.age', a.age)
+  console.log('a.sayname', a.sayName())
+  console.log('b', b)
+})()
