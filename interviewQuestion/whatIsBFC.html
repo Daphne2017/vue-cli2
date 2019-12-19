@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>Bootstrap 101 Template</title>
+</head>
+<style>
+  .parents{
+    width:200px;
+  }
+  .column{
+      float: left;
+      width: 150px;
+      height: 300px;
+      margin-right: 10px;
+      background-color: red;
+  }
+  .column1{
+      /* overflow: hidden;创建bfc */
+      /* float: left; */
+      width: 41px;
+      height: 300px;
+      background-color:blue;
+  }
+
+</style>
+<script>
+  // https://www.jianshu.com/p/19360b4d26e7
+  // https://blog.csdn.net/qq_31635733/article/details/81636107
+</script>
+<body>
+  <div class="parents">
+    <div class="column"></div>
+    <span class="column1"></span>
+  </div>
+</body>
+
+</html>

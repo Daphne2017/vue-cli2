@@ -78,6 +78,7 @@ export default {
 <style lang="less">
   @import '~vux/src/styles/1px.less'; //~ 代表依赖的根目录 node_modules
   @import '~vux/src/styles/reset.less';
+  @import './css/test.less'; // vue-cli2全局引入less文件，全局使用，无需过多配置
 
   body {
     background-color: #fff;
