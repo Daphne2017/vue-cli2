@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="scrollBox">
+    <div id="contentA">
+      测试一些数据
+      测试一些数据啦
+      测试一些数据啦
+    </div>
+    <div id="contentB">
+      开始出现在可视区了
+    </div>
+  </div>
+</body>
+<style>
+  #scrollBox {
+    background-color: aqua;
+    height: 200px;
+    width: 50px;
+    padding: 20px 10px;
+    margin-top: 100px;
+    border: red 30px solid;
+    position: relative;
+    overflow-y: scroll;
+    /* overflow: scroll; */
+    /* overflow: hidden; */
+  }
+
+  #contentB {
+    margin-top: 10px;
+    padding-top: 30px;
+  }
+</style>
+<script>
+  /*
+    ele.clientHeight = cssHeight + 上下padding；
+    ele.offsetHeight = cssHeight + 上下padding + 上下border + 水平滚动条高度；
+    ele.offsetWidth = cssWidth + 左右padding + 左右border + 垂直滚动条宽度；
+    ele.scrollHeight = cssHeight + 上下padding + 由于overflow设置为隐藏或者scroll而不可见的内容高度
+    ele.offsetTop = element(border) ---parent（padding边界) =>父元素要定位relative或者是absolute
+
+  */
+  // 1、当#scrollBox元素，设置为overflow：hidden结果如下：
+
+  // console.log("元素scrollBox的clientHeight：",document.getElementById("scrollBox").clientHeight) // 200+40 = 240px
+  // console.log("元素scrollBox的offsetHeight：",document.getElementById("scrollBox").offsetHeight) // 200+40+60 = 300px
+  // console.log("元素contentA的offsetHeight：", document.getElementById("contentA").offsetHeight) // 147
+  // console.log("元素contentB的offsetHeight：", document.getElementById("contentB").offsetHeight) // 93
+  // console.log("元素scrollBox的scrollHeight：",document.getElementById("scrollBox").scrollHeight) // 200+40+（147+93+10 - 200） = 290，因为contentB加了margin-top：10；
+
+  // 2、当#scrollBox元素，设置为verflow-y: scroll结果如下：
+  console.log("元素scrollBox的clientHeight：", document.getElementById("scrollBox").clientHeight) // 200+40 = 240px
+  console.log("元素scrollBox的clientWidth：", document.getElementById("scrollBox").clientWidth) // 50-17+20 = 53
+  console.log("元素scrollBox的offsetHeight：", document.getElementById("scrollBox").offsetHeight) // 200+40+60 = 300px
+  console.log("元素scrollBox的offsetWidth：", document.getElementById("scrollBox").offsetWidth) // 50-17+20+60+17= 130
+  console.log("元素contentA的offsetHeight：", document.getElementById("contentA").offsetHeight) // 231 是因为垂直滚动条占了部分宽度，所以contentA的offsetHeight变大了
+  console.log("元素contentA的offsetWidth：", document.getElementById("contentA").offsetWidth) // 50-17= 33
+  console.log("元素contentB的offsetHeight：", document.getElementById("contentB").offsetHeight) // 135 是因为垂直滚动条占了部分宽度，所以contentA的offsetHeight变大了
+  console.log("元素contentB的offsetWidth：", document.getElementById("contentB").offsetWidth) // 50-17=33
+  console.log("元素scrollBox的scrollHeight：", document.getElementById("scrollBox").scrollHeight) // 200+40+(231+135+10 - 200) = 416，因为contentB加了margin-top：10；
+  // 3、当#scrollBox元素，设置为verflow：scroll结果如下：
+  // console.log("元素scrollBox的clientHeight：", document.getElementById("scrollBox").clientHeight) // 200-17+40 = 223 // 因为水平滚动条占了部分高度，所以clientHeight变小了
+  // console.log("元素scrollBox的offsetHeight：", document.getElementById("scrollBox").offsetHeight) // 200-17+40+60 +17 = 300
+  // console.log("元素contentA的offsetHeight：", document.getElementById("contentA").offsetHeight) // 仍是231
+  // console.log("元素contentB的offsetHeight：", document.getElementById("contentB").offsetHeight) //  仍是135
+  // console.log("元素scrollBox的scrollHeight：", document.getElementById("scrollBox").scrollHeight) // 仍是416  183+40+(231+135+10 - 183)
+
+  // //offsetTop是元素与offsetParent的距离，循环获取直到页面顶部
+  // function getTop(e) {
+  //   var T = e.offsetTop;
+  //   return T;
+  // }
+
+  // function lazyLoad(imgs) {
+  //   var H = document.getElementById('scrollBox').clientHeight;//获取可视区域高度
+  //   var S = document.getElementById('clientHeight').scrollTop;
+
+  //     if (H + S > getTop(document.getElementById('scrollTop'))) {
+  //       console.log("开始出现在可视区了")
+  //     }
+
+  // }
+
+  // window.onload = document.getElementById('scrollBox').onscroll = function () { //onscroll()在滚动条滚动的时候触发
+  //   lazyLoad(imgs);
+  // }
+  // 懒加载
+  function lazyLoad() {
+    var clientHeight = document.getElementById("scrollBox").clientHeight;
+    var scrollTop = document.getElementById("scrollBox").scrollTop;
+    var offsetTop = document.getElementById("contentB").offsetTop;
+    if (clientHeight + scrollTop >= offsetTop) {
+      console.log('contentB我开始出现啦')
+    }
+  };
+  // 是否滚动到底
+  function toBottom() {
+
+    var scrollTop = document.getElementById("scrollBox").scrollTop;
+    var clientHeight = document.getElementById("scrollBox").clientHeight;
+    var scrollHeight = document.getElementById("scrollBox").scrollHeight;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      console.log('已经到底啦啦啦啦')
+    };
+
+  }
+  var canRun = true;
+  window.onload = document.getElementById("scrollBox").onscroll = function () {
+    // 节流：如果第一次scroll触发的事件还没有开始执行或者还没执行完毕，频繁触发scroll，将不会做任何操作
+    if (!canRun) {
+      return;
+    }
+    canRun = false;
+    setTimeout(() => {
+      lazyLoad()
+      toBottom()
+      canRun = true;
+    }, 500);
+
+  }
+</script>
+<!-- <script src="./for.js"></script> -->
+
+</html>
+
+<!--
+/*
+  ele.clientHeight = cssHeight + 上下padding；
+  ele.offsetHeight = cssHeight + 上下padding + 上下border + 水平滚动条高度；
+  ele.offsetWidth = cssWidth + 左右padding + 左右border + 垂直滚动条宽度；
+  ele.scrollHeight = cssHeight + 上下padding + 由于overflow设置为隐藏或者scroll而不可见的内容高度
+  ele.offsetTop = element(border) ---parent（padding边界) =>父元素要定位relative或者是absolute
+
+*/
+
+jQuery和原生js获取高度的方式对比：
+设要获取的元素为obj,另外此处的获取方法只针对box-sizing:content-box;对于box-sizing:border-box;暂时没有测试。有兴趣的小伙伴可以自己去试一下。
+1.只想获取内容实际高度的(只有height ，不包括padding、border、margin)
+原生js: window.getComputeStyle(obj).height----------- jQuery: $ (obj).css(“height”)或$(obj).height();
+2.只想获取height+padding.
+原生js: obj.clientHeight---------- jQuery: $ (obj).innerHeight();
+3.只想获取height+padding+border
+原生js: obj.offsetHeight--------------- jQuery: $ (obj).outerHeight();
+4.想获取height+padding +border +margin
+原生js: 暂无-------------jQuery: $ (obj).outerHeight(true);
+————————————————
+版权声明：本文为CSDN博主「郑伟斌」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+https://blog.csdn.net/qq_26909801/article/details/89139440
+
+拓展 各种获得宽高的方式
+
+获取屏幕的高度和宽度（屏幕分辨率）：
+window.screen.height/width
+获取屏幕工作区域的高度和宽度（去掉状态栏）：
+window.screen.availHeight/availWidth
+网页全文的高度和宽度：
+document.body.scrollHeight/Width
+滚动条卷上去的高度和向右卷的宽度：
+document.body.scrollTop/scrollLeft
+网页可见区域的高度和宽度（不加边线）：
+document.body.clientHeight/clientWidth
+网页可见区域的高度和宽度（加边线）
+
+作者：信心
+链接：https://juejin.im/post/5b94d8965188255c5a0cdc02
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+-->

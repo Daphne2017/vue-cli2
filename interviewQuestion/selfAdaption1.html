@@ -1,0 +1,33 @@
+<!--
+  自适三栏布局：
+ 两列定宽，一列自适应
+  1.（使用float+overflow）
+ -->
+  <style>
+    .left {
+      background-color: red;
+    }
+
+    .center {
+      background-color: yellow;
+    }
+
+    .left,
+    .center {
+      width: 100px;
+      float: left;
+      margin-right: 20px;
+    }
+
+    .right {
+      overflow: hidden; /* 最右侧自适应，构建BFC*/
+      background-color: blue;
+    }
+  </style>
+
+  <div class="left">left</div>
+  <div class="center">center</div>
+  <div class="right">
+    <p>right</p>
+    <p>right</p>
+  </div>

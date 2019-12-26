@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Test</title>
+  <!-- 引入vue.js -->
+ <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>xjhgfkd{{ message }}</p>
+    <input type="button" value="开始" @click="start">
+    <input type="button" value="停止" @click="stop">
+  </div>
+</body>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      message: "Hello World!",
+      intervalId: null
+    },
+    methods: {
+      //ES6 简化写法 原写法为start:function(){},
+      start() {
+        //this指向vm
+        if (this.intervalId != null) return;
+        this.intervalId = setInterval(() => {
+          //ES6箭头函数中，this指向绑定定义时所在的作用域，而不是指向运行时所在的作用域
+          var start = this.message.substring(0, 1)
+          var end = this.message.substring(1)
+          this.message = end + start
+        }, 200)
+      },
+      stop() {
+        clearInterval(this.intervalId)
+        this.intervalId = null
+      }
+    }
+  });
+</script>
+
+</html>

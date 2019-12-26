@@ -1,0 +1,68 @@
+<!-- 如何清除浮动？
+浮动产生的原因是因为元素使用了float：left；或者position：absolute；position：fixed。导致元素脱离标准文档流。而向上浮动。
+为了不让父元素发生高度坍塌，布局不混乱，需要清除浮动。
+常见的清除浮动方法:
+
+一、父元素添加伪元素
+.topDiv:after{
+content: "020";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+.clearfix {
+/* 触发 hasLayout */
+zoom: 1; 父元素添加zoom为了兼容ie6/7
+}
+
+二、父元素利用overflow非visible清除浮动（构建BFC）
+.topDiv {
+width: 500px;
+border: 2px solid black;
+overflow: auto; //只要能构建出建构出BFC都可以
+
+}
+三、父元素结束标签之前插入清除浮动的块级元素
+<div class="topDiv">
+  <div class="textDiv">...省略若干文字</div>
+  <div class="floatDiv">float left</div>
+  <div style="clear: both;"></div>
+</div>
+  其他一些方法根据实际条件环境处理（主要还是在需要清除浮动的元素上加clear:both/left/right）：
+  1.如果子元素都浮动，那么父级设置固定高度可不发生高度坍塌
+  2.父元素也一起浮
+-->
+
+<style>
+  .topDiv {
+    width: 500px;
+    border: 2px solid black;
+  }
+
+  .textDiv {
+    color: blue;
+    border: 2px solid blue;
+  }
+  .floatDiv {
+    width: 100px;
+    height: 100px;
+    border: 2px dotted red;
+    color: red;
+    float: left;
+  }
+
+  .bottomDiv {
+    width: 500px;
+    height: 100px;
+    border: 2px dotted black;
+  }
+
+</style>
+<div class="topDiv">
+  <div class="textDiv">...省略若干文字</div>
+  <div class="textDiv">...省略若干文字啦啦啦</div>
+  <div class="floatDiv">float left</div> <!--此处的div将会浮动起来，后面div会挤上来-->
+  <!-- <div style="clear: both;"></div> 父元素结束标签之前插入清除浮动的块级元素-->
+</div>
+<div class="bottomDiv">....bottom省略若干文字.</div>

@@ -1,0 +1,40 @@
+<!--
+    1.盒模型
+  1.ie盒模型算上border、padding及自身（不算margin），标准的只算上自身窗体的大小
+  css设置方法如下
+  /* 标准模型 */
+  box-sizing:content-box;
+  /*IE模型*/
+  box-sizing:border-box;
+  复制代码2.margin、border、padding、content由外到里
+  3.几种获得宽高的方式
+
+  dom.style.width/height
+    这种方式只能取到dom元素内联样式所设置的宽高，也就是说如果该节点的样式是在style标签中或外联的CSS文件中设置的话，通过这种方法是获取不到dom的宽高的。
+  dom.currentStyle.width/height
+    这种方式获取的是在页面渲染完成后的结果，就是说不管是哪种方式设置的样式，都能获取到。但这种方式只有IE浏览器支持。
+  window.getComputedStyle(dom).width/height
+    这种方式的原理和2是一样的，这个可以兼容更多的浏览器，通用性好一些。
+  dom.getBoundingClientRect().width/height
+    这种方式是根据元素在视窗中的绝对位置来获取宽高的
+  dom.offsetWidth/offsetHeight
+    这个就没什么好说的了，最常用的，也是兼容最好的。
+ -->
+ <!--
+
+  两种盒模型
+    w3c标准模型：在标准的盒子模型中，width指content部分的宽度
+    IE盒子模型中：width表示content+padding+border这三个部分的宽度
+    box-sizing的使用
+    如果想要切换盒模型也很简单，这里需要借助css3的box-sizing属性
+
+    box-sizing: content-box 是W3C盒子模型
+    box-sizing: border-box 是IE盒子模型
+    box-sizing的默认属性是content-box
+    ————————————————
+    本文介绍的是利用CSS3的新属性box-sizing，解决div宽度设置width:100%后再设置padding或margin超出父元素的问题，有需要的朋友们可以参考借鉴。
+    box-sizing: content-box|border-box|inherit;
+
+    版权声明：本文为CSDN博主「zwkkkk1」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+    原文链接：https://blog.csdn.net/zwkkkk1/article/details/79678177
+      -->

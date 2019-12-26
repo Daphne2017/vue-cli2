@@ -1,0 +1,75 @@
+
+<!--
+  自适应双栏布局：
+  左侧定宽，右侧自适应
+  1.左侧浮动或者绝对定位，然后右侧margin撑开（float+margin）
+ -->
+
+<style>
+  .left {
+    background-color: red;
+    width: 100px;
+    float: left;
+  }
+
+  .rightfix {
+    background-color: blue;
+    margin-left: 100px;
+  }
+
+  .right {
+    margin-left: 120px;
+  }
+</style>
+
+  <div class="left">left</div>
+  <div class="rightfix">
+    <div class="right">
+      <p>right</p>
+      <p>right</p>
+    </div>
+  </div>
+<!--
+  自适应双栏布局BFC （float+overFlow）
+  <style>
+  .left {
+    width: 100px;
+    height: 400px;
+    background: green;
+    float: left;
+  }
+
+  .right {
+    overflow: hidden;
+    background: red;
+  }
+</style>
+
+<div class="left">左边</div>
+<div class="right">右边</div>
+-->
+
+<!--
+   自适应双栏布局Flex
+  <style>
+  .container {
+    display: flex;
+  }
+
+  .left {
+    width: 100px;
+    height: 400px;
+    background: green;
+  }
+
+  .right {
+    flex: 1;
+    background: red;
+  }
+</style>
+
+<div class="container">
+  <div class="left">左边</div>
+  <div class="right">右边</div>
+</div>
+-->
