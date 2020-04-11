@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="loading"></div>
+</body>
+</html>
+<style>
+    .loading{
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: url('https://img.qlchat.com/qlLive/activity/image/6ZHBLSXR-V4BB-WM6B-1586501277025-26ZN6LAR9YN2.jpg') no-repeat;
+        animation: round 1s steps(8,start) infinite;
+
+    }
+@keyframes round {
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
+</style>

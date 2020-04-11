@@ -1,0 +1,65 @@
+
+<body>
+    <div class="box demo-1">
+
+    </div>
+    <div class="box demo-2">
+        <div class="cell"></div>
+    </div>
+    <div class="box demo-3">
+        <div class="cell"></div>
+    </div>
+</body>
+
+
+<style>
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: #000;
+}
+.demo-1{
+    transition: transform 1s ease-in;
+}
+.demo-1:hover{
+   transform: rotate(45deg)
+}
+.demo-2{
+    margin-top: 10px;
+}
+.demo-2 .cell{
+    width: 200px;
+    height:200px;
+    background: red;
+}
+.demo-2:hover .cell{
+   animation: move 2s linear 2 alternate forwards running; /*alternate动画至少播放两次*/
+}
+@keyframes move {
+    100%{
+        transform:translateX(200px);
+    }
+}
+.demo-3{
+    margin:40 auto;
+    border-radius:50%;
+    animation: jump 2s ease-in  infinite;
+}
+@keyframes jump {
+    40%{
+        transform:translateY(200px);
+    }    
+    50%{
+        transform:translateY(200px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+</style>
+
+<!-- 
+    cubic-bezier(0.74,0.07,0.92,0.54)
+    clip-path:ellipse(50%, 50%, at 50%, 50%)
+     clip-path:ellipse(50%, 45%, at 50%, 48%)
+ -->

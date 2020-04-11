@@ -1,0 +1,66 @@
+<html>
+    <div class="circle">
+        <div class="pie-right">
+            <div class="right"></div>
+        </div>
+        <div class="pie-left">
+            <div class="left"></div>
+        </div>
+        <div class="mask"><span>0</span>%</div>
+    </div>
+</html>
+
+
+
+<style>
+.circle {/*这个元素可以提供进度条的颜色*/
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background: red;
+}
+.pie-right, .pie-left { /*这俩元素主要是为了分别生成两个半圆的，所以起作用的地方在于clip裁掉另一半*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+   
+}
+.right, .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background: blue; /* 注意这个才不是当前进度的颜色 */
+}
+ .pie-right, .right { /*裁掉左边一半 */
+    clip: rect(0, auto, auto, 100px);
+}
+.pie-left, .left {/*裁掉右边一半*/
+    clip: rect(0, 100px, auto, 0);
+}
+.mask {/*/我是遮罩 mask不用改 好欣慰*/
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    height: 150px;
+    width: 150px;
+    background: #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+.right{
+    transform: rotate(180deg);
+}
+.left{
+    transform: rotate(30deg);
+}
+</style>
+<!-- 知识点连接：
+实现环形进度条（CSS3+jQuery/Vue）
+https://segmentfault.com/a/1190000008959054 -->

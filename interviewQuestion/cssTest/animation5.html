@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div class="marquee">
+      <div class="content">
+          <div class="list"><img src="../../static/hebe1.jpg" alt=""></div>
+          <div class="list"><img src="../../static/hebe2.jpg" alt=""></div>
+          <div class="list"><img src="../../static/hebe3.jpg" alt=""></div>
+      </div>
+
+  </div>
+</body>
+</html>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+    $(()=>{
+        var outWidth = 600;
+        var outHeight = 400;
+        var speed = 3;
+       
+        var $marquee = $(".marquee");
+        var $content = $(".content");
+        var $list = $content.find(".list");
+        var listLength =  $list.length;
+        var contentWidth = outWidth * listLength;
+        var style = document.styleSheets
+        $marquee.css({
+            'width':`${outWidth}px`,
+            'height':`${outHeight}px`
+        })
+        $list.css({
+            'width':`${outWidth}px`,
+            'height':`${outHeight}px`
+        })
+        $content.css({
+            'width':`${contentWidth}px`,
+            'height':`${outHeight}px`,
+            'animation': `run ${speed*listLength}s linear infinite` 
+        })
+        style[0].insertRule(`
+            @keyframes run {
+                100%{
+                    transform: translateX(-${contentWidth}px);
+                }
+        
+            }
+        `)
+        var clone = $list.eq(0).clone();
+        $content.append(clone)
+        console.log("clone",clone)
+    })
+</script>
+<style>
+   .marquee{
+       overflow: hidden;
+   }
+   .content{
+    display: flex;
+   }
+   .content .list{
+        overflow: hidden;
+        flex-shrink: 0;
+   }
+   .content .list img{
+       width: 100%;
+       height: 100%;
+   }
+</style>
+
+<!-- 实现椭圆
+为了实现椭圆，需要给ellipse提供4个值：椭圆的x轴半径、y轴半径、定位椭圆位置的x坐标和y坐标，后面两个值用at关键字和前面两个值分开。
+
+CSS Code复制内容到剪贴板
+.clipClass {   
+  -webkit-clip-path: ellipse(30% 20% at 50% 50%);   
+}  
+
+
+translate3d(x,y,z)
+参数解析:
+1.x:表示在x轴方向的位移。
+2.y:表示在y轴方向的位移。
+3.z:表示在z轴方向的位移。
+
+返回介于 0（包含） ~ 1（不包含） 之间的一个随机数：
+Math.random();
+
+标签定义及使用说明
+background-size属性指定背景图片大小。
+默认值:	auto
+继承:	no
+版本:	CSS3
+JavaScript 语法:	object	object.style.backgroundSize="60px 80px"
+语法
+background-size: length|percentage|cover|contain;
+值	描述
+length	设置背景图片高度和宽度。第一个值设置宽度，第二个值设置的高度。如果只给出一个值，第二个是设置为 auto(自动)
+percentage	将计算相对于背景定位区域的百分比。第一个值设置宽度，第二个值设置的高度。如果只给出一个值，第二个是设置为"auto(自动)"
+cover	此时会保持图像的纵横比并将图像缩放成将完全覆盖背景定位区域的最小大小。
+contain	此时会保持图像的纵横比并将图像缩放成将适合背景定位区域的最大大小。
+-->
