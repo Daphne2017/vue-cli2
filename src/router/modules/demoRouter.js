@@ -81,6 +81,14 @@ export default [
         meta: {
           title: '冻结对象'
         }
+      },
+      {
+        path: 'fourth',
+        name: 'fourAnnivisity',
+        component: resolve => require(['@/views/fourthAniversitity/activity'], resolve),
+        meta: {
+          title: '四周年活动'
+        }
       }
     ]
   }
