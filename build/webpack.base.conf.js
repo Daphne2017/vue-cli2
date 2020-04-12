@@ -41,7 +41,8 @@ let webpackConfig = {
   },
   module: {
     rules: [
-      ...(config.dev.useEslint ? [createLintingRule()] : []),
+      // ...(config.dev.useEslint ? [createLintingRule()] : []),
+      ...(config.dev.useEslint ? [] : []),//暂时禁用eslint规则则
       {
         test: /\.vue$/,
         loader: 'vue-loader',

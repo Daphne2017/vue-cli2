@@ -4,10 +4,12 @@ import notFound from '@/components/notFound'
 import error from '@/components/error'
 import HelloWorld from '@/components/HelloWorld'
 import demoRouter from './modules/demoRouter'
+import marqueeRouter from './modules/marqueeRouter'
 
 Vue.use(Router) // 其他组件中，this.$router了
 let routes = [
   ...demoRouter,
+  ...marqueeRouter,
   {
     path: '/',
     name: 'HelloWorld',

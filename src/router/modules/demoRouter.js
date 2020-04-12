@@ -4,7 +4,7 @@
 export default [
   {
     path: '/demo',
-    component: resolve => require(['@/views/vueCliDemo/index'], resolve),
+    component: resolve => require(['@/views/index'], resolve),
     meta: {
       title: '搭建vue-cli',
       keepAlive: true

@@ -1,20 +1,8 @@
 <template>
   <div id="app">
     <header class="commonHead">
-      <img src="./assets/logo.png">
       <h2>vue-cli</h2>
-    <div>
-      路由连接：
-      <ul >
-        <router-link class="link-item"
-          :to="`/demo/${item.link}`"
-          tag="li" v-for="(item, index) of linklist" :key="index">
-          <span>{{item.name}}</span>
-        </router-link>
-      </ul>
-    </div>
     </header>
-
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive">
         <!-- 这里是会被缓存的视图组件 -->
@@ -31,44 +19,7 @@ export default {
   name: 'app',
   data () {
     return {
-      linklist: [
-        {
-          link: 'mock',
-          name: 'mock的demo'
-        },
-        {
-          link: 'proxyTable',
-          name: 'proxyTable的demo'
-        },
-        {
-          link: 'qsPlugin',
-          name: 'qsPlugin的demo'
-        },
-        {
-          link: 'quillEditor',
-          name: '富文本编辑器的使用'
-        },
-        {
-          link: 'echarts',
-          name: 'echarts的使用'
-        },
-        {
-          link: 'virtualList',
-          name: 'virtualList虚拟列表的使用'
-        },
-        {
-          link: 'lazyLoadImages',
-          name: 'lazyLoadImages图片懒加载'
-        },
-        {
-          link: 'virtualDom',
-          name: 'virtualDom的diff算法的理解，以及就地复用'
-        },
-        {
-          link: 'freezeObj',
-          name: '如何使用冻结对象'
-        }
-      ]
+
     }
   },
   mounted: function () {}
