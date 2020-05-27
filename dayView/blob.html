@@ -1,0 +1,24 @@
+<script>
+ var data1 = "a";
+var data2 = "b";
+var data3 = "<div style='color:red;'>This is a blob</div>";
+var data4 = { "name": "abc" };
+
+var blob1 = new Blob([data1]);
+var blob2 = new Blob([data1, data2]);
+var blob3 = new Blob([data3]);
+var blob4 = new Blob([JSON.stringify(data4)]);
+var blob5 = new Blob([data4]);
+var blob6 = new Blob([data3, data4]);
+
+console.log(blob1);  //输出：Blob {size: 1, type: ""}
+console.log(blob2);  //输出：Blob {size: 2, type: ""}
+console.log(blob3);  //输出：Blob {size: 44, type: ""}
+console.log(blob4);  //输出：Blob {size: 14, type: ""}
+console.log(blob5);  //输出：Blob {size: 15, type: ""}
+console.log(blob6);  //输出：Blob {size: 59, type: ""}   
+</script>
+
+<!-- https://www.jianshu.com/p/b322c2d5d778  // 简书地址 -->
+
+

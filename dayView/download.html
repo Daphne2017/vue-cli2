@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Blob Test</title>  
+
+  </script>
+  <script>
+    function createDownloadFile() {
+      var content = "Blob Data";
+      var blob = new Blob([content],{ type: 'application/vnd.ms-excel' }); //blob为二进制数据的文件对象，可以像操作File对象一样操作Blob对象，实际上，File继承自Blob。Blob 对象表示一个不可变、原始数据的类文件对象,type: 'application/vnd.ms-excel'表明是excel类型的二进制数据
+      var link = document.getElementsByTagName('a')[0];
+      link.download = "file";
+      link.href = URL.createObjectURL(blob); // Blob URL可以通过URL.createObjectURL(blob)创建。在绝大部分场景下，我们可以像使用Http协议得URL一样使用Blob URL。常见得场景有： 作为文件得下载地址和作为图片资源地址。 //得到文件下载地址
+    }
+    window.onload = createDownloadFile;
+  </script>
+</head>
+
+<body>
+  <a>下载</a>
+</body>
+
+</html>
+
+// ctx 就近
+ctx.set('Content-disposition', `attachment;filename=${filename}.xlsx`) // 实现文件下载，可在响应头头中加入

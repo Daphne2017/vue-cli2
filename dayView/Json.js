@@ -11,7 +11,6 @@ const user = {
     }
   }
 }
-
 console.log(JSON.stringify(user))
 
 // 结果
