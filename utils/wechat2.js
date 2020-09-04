@@ -265,3 +265,20 @@ export function closeShare () {
     wx.hideAllNonBaseMenuItem()
   })
 };
+
+/**
+使用方法
+    //初始化分享
+    initShare() {
+        const {rankNum} = this.state.resultData
+        let shareData = {
+            title: `我是千聊的第${rankNum}位讲师`,
+            desc: '看好你成为行业领路人，免费领取知识讲堂～',
+            imgUrl: 'https://img.qlchat.com/qlLive/activity/image/DOUAVXDY-1IS7-4KEZ-1584954572433-385SEYQXTJ37.png',
+            shareUrl: `${window.origin}/activity/page/${this.initData.random}/fourthAnniversaryActivity?ch=4thactivity&shareUserId=${this.userId}` 
+        };
+        share(shareData);
+        appSdk.shareConfig(shareData)
+    }
+ */
+
