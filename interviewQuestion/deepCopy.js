@@ -107,21 +107,21 @@
   //   console.log('原始对象1', obj)
   //   console.log('新对象1', copyObj)
   // })();
-  // (function () {
-  //   var obj = {
-  //     id: 'yys',
-  //     name: '严燕姗',
-  //     parents: {
-  //       id: 'luo',
-  //       name: '罗秀宁'
-  //     }
-  //   }
-  //   let copyObj = {...obj}
-  //   copyObj.age = 26
-  //   copyObj.parents.age = 55
-  //   console.log('原始对象2', obj)
-  //   console.log('新对象2', copyObj)
-  // })();
+  (function () {
+    var obj = {
+      id: 'yys',
+      name: '严燕姗',
+      parents: {
+        id: 'luo',
+        name: '罗秀宁'
+      }
+    }
+    let copyObj = {...obj}
+    copyObj.age = 26
+    copyObj.parents.age = 55
+    console.log('原始对象2', obj)
+    console.log('新对象2', copyObj)
+  })();
   // // 对象的深拷贝
   // (function () {
   //   var obj = {

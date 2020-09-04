@@ -1,0 +1,83 @@
+https://mp.weixin.qq.com/s/QjVeoBM6Ss2gXbwwOZK-4w  // 前端如何导出二进制流文件
+
+之前在项目中碰到了一个表格导出的功能，但是跟以前做过的导出完全不同。
+
+以前做过的导出功能是这样的：后端提供一个导出接口，调用该接口会返回一个文件下载链接，然后将链接塞到a标签的href属性中，再通过触发a标签的点击事件下载该文件。
+
+而这次的功能却是：后端提供一个导出接口，调用该接口成功的话会直接返回一个二进制流数据，如果导出过程中出现错误则会返回一个json格式的数据。在成功的情况下，前端需要将该二进制流数据转成文件并下载，在失败的情况下则需要根据返回数据的状态码和消息自动进行错误提示和其他操作。
+
+对于下载二进制文件，作者在曾经的需求中做过类似的功能，可以直接将二进制流的内容转换成 Blob 对象，然后通过这个对象创建一个 objectURL ，之后重复上面 a 标签的操作即可。
+
+确定了思路，就开始码代码了。项目中使用的是axios作为网络请求库，后端返回的数据会在axios请求成功后返回的res.data中，在拿到返回的数据后，通过下面这行代码将二进制流转换成了Blob对象并创建下载链接后下载：
+
+<script>
+    // type 为需要导出的文件类型，此处为xls表格类型
+    const blob = new Blob( [res.data], {type: application/x-xls} )
+    // 兼容不同浏览器的URL对象
+    const url = window.URL || window.webkitURL || window.moxURL
+    // 创建下载链接
+    const downloadHref = url.createObjectURL(blob)
+    // 创建a标签并为其添加属性
+    let downloadLink = document.createElement(‘a’)
+    downloadLink.href = downloadHref
+    downloadLink.download = ‘下载文件名.xls’
+    // 触发点击事件执行下载
+    downloadLink.click()
+</script>
+
+正常来说到这一步就结束了，在后端导出失败时，前端成功进入了失败的逻辑；但是在接口调用成功并且后端也给了二进制流的情况下，打开导出的文件发现是乱码。在多次对代码进行检查后，确保导出的代码并没有问题。那么问题出在哪了呢？难道是请求发起时就出错了么？于是又去检查请求头，发现responseType = application/json，由于返回类型的错误导致导出时出现了错误，于是将这个字段的值修改成了arraybuffer，表示希望返回的数据类型是一个流文件。
+
+但是到这里问题又来了，如果返回类型是arraybuffer，那如果导出失败，本应返回的json格式数据也会变成arraybuffer，这种情况下就需要我自己对这个流进行处理，判断它是导出失败的json，还是导出成功的流文件，于是在上面的导出代码之前添加了一些转json的操作：
+<script>
+    const tempBlob = new Blob( [res.data], {type: ‘application/json} )
+    // 通过 FileReader 读取这个 blob
+    const reader = new FileReader()
+    reader.onload = e => {
+    const res = e.target.result
+    // 此处对fileReader读出的结果进行JSON解析
+    // 可能会出现错误，需要进行捕获
+    try {
+        const json = JSON.parse(res)
+        if (json) {
+        // 解析成功说明后端导出出错，进行导出失败的操作，并直接返回
+        return
+        }
+    } catch (err) {
+        // 该异常为无法将字符串转为json
+        // 说明返回的数据是一个流文件
+        // 不需要处理该异常，只需要捕获即刻
+    }
+
+    // 如果代码能够执行到这里，说明后端给的是一个流文件，再执行上面导出的代码
+    // do export code
+    }
+</script>
+
+
+// 将blob对象以文本的方式读出，读出完成后将会执行 onload 方法
+reader.readAsText(tempBlob)
+通过上面的代码，就能够基本完美实现业务需求了。但是在实际测试过程中，又发现了两个坑：
+
+火狐浏览器上a标签点击导出无效。解决方法：需要先将a标签添加到当前页面上，再执行click，之后再移除该节点，而不能直接执行click；
+
+在IE和Edge浏览器上无效。对于这一点，如果你的项目不需要支持这两款浏览器可以直接忽略，如果需要支持，可以继续往下看。
+
+兼容 IE & EDGE
+导致在IE和EDGE上不兼容的原因是，这两款浏览器无法通过a标签直接下载blob对象，但是解决方法却非常简单：
+
+首先判断当前浏览器是否是IE/EDGE；
+
+如果不是，则走正常流程；
+
+如果是，则走下面这行代码：
+
+<script>
+    window.navigator.msSaveOrOpenBlob(blob, ‘下载文件名.xls’)
+</script>
+
+
+IE 和 EDGE 中提供了一个专门的方法来下载Blob对象，讲真，这个方法还是非常好用的，一行代码就能够搞定~
+
+以上就是完整的二进制流文件前端导出的方法，感兴趣的小伙伴可以试着将完整的demo写一下哦~对于代码中用到的对象及方法，就不再赘述了，小伙伴们可以自己去查阅文档，这样会记得更深！
+
+<!-- https://mp.weixin.qq.com/s/QjVeoBM6Ss2gXbwwOZK-4w --> // 前端如何导出二进制流文件

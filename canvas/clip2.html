@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='canvas' style="border:1px solid #d3d3d3;"></canvas>
+</body>
+</html>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    //设置画布的宽高
+    canvas.width = 500;
+    canvas.height = 500;
+
+    // 坐标转换工具函数
+    function getCircleXY(canvas,x,y){
+        // .getBoundingClientRect() https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+        var canvasOb = canvas.getBoundingClientRect()
+        var canvasX = x - canvasOb.left
+        var canvasY = y - canvasOb.top
+        return {x:canvasX,y:canvasY}
+    }
+
+    ctx.beginPath()
+    ctx.fillStyle = '#000'
+    ctx.fillRect(0,0,500,500)
+
+    // 注册canvas的监听事件
+    canvas.addEventListener('mousemove',function(e){
+
+        // 每次触发都重新创造黑暗环境
+        ctx.beginPath()
+        // ctx.fillStyle = '#000' 
+        // ctx.fillRect(0,0, canvas.width, canvas.height)
+
+        // clip()前保存原始环境
+        ctx.save()
+        var l = getCircleXY(canvas,e.clientX,e.clientY)
+        ctx.beginPath() // 重置路径开始裁剪
+        ctx.arc(l.x,l.y,80,0,2*Math.PI,false) // 从三点钟方向顺时针画一个圆
+        ctx.fillStyle = 'white'
+        ctx.fill()
+        ctx.clip() // 开始裁剪这个圆
+        // ctx.clearRect(0,0,canvas.width, canvas.height) // 如果给圆填充了白色，可以不清空
+        ctx.fillStyle = '#058'
+        ctx.font = 'bold 50px Serif'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.fillText('Canvas实现手电筒照明效果', canvas.width/2, canvas.height/2) // 填充文本
+        ctx.restore()
+
+    })
+
+  
+</script>

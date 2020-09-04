@@ -1,0 +1,56 @@
+<canvas id='canvas' style="border:1px solid #d3d3d3;"></canvas>
+<script>
+
+// https://www.runoob.com/try/try.php?filename=tryhtml5_canvas_clip  菜鸟的例子
+// https://zhuanlan.zhihu.com/p/26007502 知乎的例子
+    /* 
+    使用HTML5 Canvas API中的clip()方法裁剪区域图像的实例教程,其中需要特别注意save()和restore()方法的搭配使用,需要的朋友可以参考下
+    1、给canvas初始化
+    */
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+
+    //设置画布的宽高
+    canvas.width = 600;
+    canvas.height = 600;
+
+    // 开始绘画
+    ctx.beginPath()
+    ctx.rect(0,0,400,500)
+    ctx.fillStyle = 'pink'
+    ctx.fill()
+    // ctx.fillRect(0,0,400,500)
+
+    ctx.save() // 对裁剪之前的环境进行保存
+
+    ctx.beginPath() // 重置路线进行裁剪
+    ctx.arc(200,200,100,0,Math.PI*2,false) // 绘制圆
+    ctx.stroke(); // 画圆不填充颜色
+    // ctx.fillStyle = 'yellow'
+    // ctx.fill()
+    ctx.clip() // 裁剪，裁剪之后的绘画只能在裁剪的区域渲染，无法访问其他的区域
+
+    ctx.restore() // 将之前保存的环境恢复
+
+    ctx.fillStyle = 'green'
+    ctx.fillRect(0,0,150,300) // 只有裁剪的区域被涂上了绿色。
+
+/* 
+3、分析
+经过以上的分析：
+
+fillStyle + fillRect = rect + fillStyle + fill // 其他的方法同理，绘制加上填充
+rect + stroke // 属于没有填充的画图
+
+裁剪后，再对画布进行绘制，fillRect（0，0，500，400）；在效果图中却只看到裁剪的那个圆才显示红色；那么为什么不是整个画布都显示红色呢？为什么不是除了裁剪的圆外其他地方是红色呢？
+那么，这就说明了一个问题，clip()改变了绘画环境。ctx()调用后，所裁剪的区域就是clip ()后的绘制环境，clip()之后的绘画只能在裁剪区域中渲染，不能访问画布上的其他区域。那么我裁剪之后想要在画布其他区域上绘制，那该怎么办呢？
+---------------------------save()和restore()------------------------------
+那只能在裁剪clip()前使用save()方法将clip()前的绘制环境保存，clip()完成后，再利用restore()方法将之前保存的环境恢复。
+
+*/
+
+
+
+
+</script>

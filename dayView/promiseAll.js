@@ -64,7 +64,8 @@ async function updateMenu () {
 }
 
 /**
-   * 删除菜单(批量)
+   * 删除菜单(批量),
+   * promise.all可以让接口并发执行的。
    */
 async function deleteMenu () {
   const { ctx } = this

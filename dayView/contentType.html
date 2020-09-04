@@ -175,6 +175,32 @@ response的Content-Type
 response的Content-Type设置建议：
 
 一般情况下不需要显示设置；
+例如后端返回一个文件，需要导出excel文件，返回的是buffer文件，则response的content-type默认是：content-type: application/octet-stream
+const bufferContent = await workbook.xlsx.writeBuffer()
+ctx.body = bufferContent
+// 设置
+ctx.set('Content-type', 'multipart/form-data')
+ctx.set('Content-disposition', `attachment;filename=${filename}.xlsx`) // ，告诉浏览器弹窗下载框
+
+前端：
+// 文件导出
+export function exportFile(url, params) {
+  return request({
+    responseType: 'blob',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    timeout: 1000 * 60,
+    url: url,
+    method: 'get',
+    params: {
+      query: qs.stringify(params),
+    },
+  })
+}
+var aBlob = new Blob( array, options );
+
+
 如果是文件导出，Content-Type 设置为 multipart/form-data，并且添加一个Content-Disposition设置为attachment;fileName=文件.后缀。
 注：Content-Disposition是Content-Type的扩展，告诉浏览器弹窗下载框，而不是直接在浏览器里展示文件。因为一般浏览器对于它能够处理的文件类型，如txt，pdf 等，它都是直接打开展示，而不是弹窗下载框。
 下面的一个设置response的Content-Type的例子：
@@ -195,3 +221,34 @@ content-type →application/json;charset=UTF-8
 链接：https://www.jianshu.com/p/de5845b4c095
 来源：简书
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+<script>
+    /* 
+    
+    服务端响应（Response）的Content-Type最好也保持准确，虽然一般web开发中，前端解析响应的数据不会根据Content-Type，并且服务端一般能自动设置准确的Content-Type，但是如果乱设置某些情况下可能会有问题，比如导出文件，打开图片等。
+    // 文件导出
+    export function exportFile(url, params) {
+        return request({
+            responseType: 'blob', //  表示服务器响应的数据类型，可以是 'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
+            responseType: 'json', // 默认的值是json
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            timeout: 1000 * 60,
+            url: url,
+            method: 'get',
+            params: {
+            query: qs.stringify(params),
+            },
+        })
+    }
+    虽然response的Content-Type服务器能够自动设置准确的，但是前端解析响应的数据不会根据Content-Type，而是根据axios设置的responseType类型
+    例如： 设置responseType: 'blob'，打印返回结果是：Blob {size: 55, type: "application/json"}
+    而此时服务器自动设置的Content-Type是：content-type: application/json; charset=utf-8，接口真正返回的是： ctx.body = { msg: 'ceshi', data: '1111111111111', code: 111111111 }
+
+    Blob {size: 55, type: "application/json"} 对象？
+    ArrayBuffer(55) {} 对象？
+    
+    */
+</script>

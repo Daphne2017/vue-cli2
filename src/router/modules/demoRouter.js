@@ -89,6 +89,22 @@ export default [
         meta: {
           title: '四周年活动'
         }
+      },
+      {
+        path: 'canvasCard',
+        name: 'canvasCard',
+        component: resolve => require(['@/views/vueCliDemo/canvasCard'], resolve),
+        meta: {
+          title: 'canvas画图'
+        }
+      },
+      {
+        path: 'uploadImage',
+        name: 'uploadImage',
+        component: resolve => require(['@/views/vueCliDemo/uploadImage'], resolve),
+        meta: {
+          title: '图片上传'
+        }
       }
     ]
   }

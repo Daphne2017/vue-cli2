@@ -1,0 +1,176 @@
+
+
+<script>
+    'use strict';
+ // egg读取远程文件
+ const Service = require('egg').Service;
+  
+ class NewsService extends Service {
+     // 获取新闻列表
+     async getNewsList() {
+         var api = this.config.api + 'appapi.php?a=getPortalList&catid=20&page=1'
+         // curl的方法获取远程的数据
+         var response = await this.ctx.curl(api);
+         // 把返回的Buffer类型转转换成对象
+         var data = JSON.parse(response.data);   
+         return data.result;
+     }
+     //  获取新闻详情(控制器中调用时要传参)
+     async getNewsContent(aid) {
+         var api = this.config.api + 'appapi.php?a=getPortalArticle&aid=' + aid;
+         // curl的方法获取远程的数据
+         var response = await this.ctx.curl(api);
+         // 把Buffer类型转转换成对象
+         var data = JSON.parse(response.data);    
+         return data.result;
+     }
+ }
+</script>
+
+<!-- node读取远程文件 -->
+<script>
+/* 用Node.js读取远程的图片文件并写入本地？
+javascriptnode.js
+如题，我想从通过远程绝对路径获取一些图片，并写入本地的某个文件夹内。如下处理： */
+
+const http = require('http')
+const fs = require('fs')
+
+const urlArr = [
+'http://img.zcool.cn/community/01e505554437be0000019ae95582a2.jpg@900w_1l_2o_100sh.jpg',
+'http://static.pig66.com/uploadfile/2017/1102/20171102095531217.png',
+]
+
+urlArr.forEach(url => {
+    getImg(url)
+})
+
+function getImg(url, name) {
+    http.get(url, {encoding: null}, res => {
+        let img = []
+        let size = 0
+        // 将图片地址以【.】符号分割，取最后一项，即为格式后缀
+        const _arr = url.split('.')
+        const format = _arr[_arr.length - 1]
+        // 如果没有传入图片名字，则使用随机数
+        const _name = name ? name : 'image-' + Math.floor(Number(new Date()) * Number(Math.random()))
+        res.on('data', chunk => {
+            img.push(chunk)
+            size += chunk.length
+        })
+        res.on('end', () => {
+            // 合并 Buffer
+            const buffer = Buffer.concat(img, size)
+            fs.writeFileSync(`img/${_name}.${format}`, buffer, (err) => {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log("数据写入成功！");
+            })
+        })
+    })
+}
+
+// https://segmentfault.com/q/1010000018760426 用Node.js读取远程的图片文件并写入本地
+
+var get = http.get(options).on('response', function (response) {
+    response.on('data', function (chunk) {
+        console.log('BODY: ' + chunk);
+    });
+});
+/* 我想将文件解析为csv，但是为此，我需要整个文件而不是分块数据。会导致分块数据 */ 
+
+var request = require('request');
+request.get('http://www.whatever.com/my.csv', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        var csv = body;
+        // Continue with your processing here.
+    }
+});
+</script>
+
+<script>
+/* nodejs抓取网络图片转换为base64编码的图片 https://www.cnblogs.com/zhangyuezhen/p/6920136.html 连接
+抓取网络图片需要加载http模块 */
+
+//假定这是index.js文件
+
+var http = require('http'); // 
+var url = 'http://p0.meituan.net/tuanpic/3df525af5a3f7fe04077567d2a6caf794904.png';  //一张网络图片
+
+ 
+
+http.get(url,function(res){
+　　var chunks = []; //用于保存网络请求不断加载传输的缓冲数据
+　　var size = 0;　　 //保存缓冲数据的总长度
+
+　　res.on('data',function(chunk){ // 会进行分块处理
+　　　　chunks.push(chunk);　 //在进行网络请求时，会不断接收到数据(数据不是一次性获取到的)，
+
+　　　　　　　　　　　　　　　　//node会把接收到的数据片段逐段的保存在缓冲区（Buffer），
+
+　　　　　　　　　　　　　　　　//这些数据片段会形成一个个缓冲对象（即Buffer对象），
+
+　　　　　　　　　　　　　　　　//而Buffer数据的拼接并不能像字符串那样拼接（因为一个中文字符占三个字节），
+
+　　　　　　　　　　　　　　　　//如果一个数据片段携带着一个中文的两个字节，下一个数据片段携带着最后一个字节，
+
+　　　　　　　　　　　　　　　　//直接字符串拼接会导致乱码，为避免乱码，所以将得到缓冲数据推入到chunks数组中， 
+
+　　　　　　　　　　　　　　　　//利用下面的node.js内置的Buffer.concat()方法进行拼接
+
+　　　　　　　　　
+　　　　size += chunk.length;　　//累加缓冲数据的长度
+　　});
+
+　　
+
+　　res.on('end',function(err){
+
+　　　　var data = Buffer.concat(chunks, size);　　//Buffer.concat将chunks数组中的缓冲数据拼接起来，返回一个新的Buffer对象赋值给data
+
+　　　　console.log(Buffer.isBuffer(data));　　　　//可通过Buffer.isBuffer()方法判断变量是否为一个Buffer对象
+
+　　　　
+
+　　　　var base64Img = data.toString('base64');　　//将Buffer对象转换为字符串并以base64编码格式显示
+
+　　　　console.log(base64Img);　　 //进入终端terminal,然后进入index.js所在的目录，
+
+　　　　　　　　　　　　　　　　　　　//在终端中输入node index.js
+
+　　　　　　　　　　　　　　　　　　　//打印出来的就是图片的base64编码格式，格式如下　　　　
+
+　　});
+
+});
+</script>
+
+<script>
+
+/* 读取远程文件的最佳方法是什么？我想获取整个文件(而不是大块)。
+我从以下示例开始 */
+
+var get = http.get(options).on('response', function (response) {
+    response.on('data', function (chunk) {
+        console.log('BODY: ' + chunk);
+    });
+});
+
+/* 
+我想将文件解析为csv，但是为此，我需要整个文件而不是分块数据。
+最佳答案
+我将为此使用request: */
+
+request('http://google.com/doodle.png').pipe(fs.createWriteStream('doodle.png'))
+
+/* 或者，如果您不需要先保存到文件，而只需要将CSV读取到内存中，则可以执行以下操作 */:
+var request = require('request');
+request.get('http://www.whatever.com/my.csv', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        var csv = body;
+        // Continue with your processing here.
+    }
+});
+// 等等
+</script>

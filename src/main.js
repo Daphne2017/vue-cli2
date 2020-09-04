@@ -113,6 +113,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Mock from './mock' // 刚刚手写的mock.js文件
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 import axios from 'axios' // axios http请求库 //需要注意的是axios是基于Promise的，因此如果你需要兼容低版本浏览器(caniuse)，需要引入polyfill。
 import Qs from 'qs'
@@ -146,6 +148,7 @@ import echarts from 'echarts'
 // 官网地址：vux-loader https://doc.vux.li/zh-CN/vux-loader/install.html
 // window.Promise = Promise  // 采用require('es6-promise').polyfill()
 require('es6-promise').polyfill()
+Vue.use(ElementUI)
 Vue.use(AlertPlugin)
 Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
@@ -178,3 +181,4 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+

@@ -1,0 +1,143 @@
+<!-- 1、绝对定位 ＋ 未知宽高 ＋ translate
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+//需要补充浏览器前缀
+
+2、flex 轻松搞定水平垂直居中(未知宽高)
+display: flex;
+align-items: center;
+justify-content: center;
+
+3、文本末尾添加省略号
+当文本的内容超出容器的宽度的时候，我们希望在其默认添加省略号以达到提示用户内容省略显示的效果。
+宽度固定，适合单行显示...
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+
+4、宽度不固定，适合多行以及移动端显示
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical; -->
+<!-- demo1 -->
+<div style="color: transparent;
+text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);">
+    给文本制作一种模糊的效果
+</div>
+
+
+<!-- demo2 -->
+<div class="loading">
+动态的简单loading
+</div>
+<style>
+.loading:after {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  content: "\2026";
+  animation: ellipsis 2s infinite; 
+}
+@keyframes ellipsis {
+  from {
+    width: 2px;
+  }
+  to {
+    width: 15px;
+  }
+}
+</style>
+
+<!-- demo3 -->
+<div class="select">
+    自定义的文本选中颜色
+</div>
+<style>
+.select::selection {
+  color: green;
+  background-color: pink;
+}
+.select::-moz-selection {
+  color: green;
+  background-color: pink;
+}
+</style>
+
+<!-- demo4顶角贴纸效果 -->
+
+<div class="wrap">
+    <div class="ribbon">
+      <a href="#">顶角贴纸效果</a>
+    </div>
+</div>
+<style>
+.wrap {
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f3f3f3;
+}
+
+.ribbon {
+  background-color: #a00;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  /* 盒子阴影效果shadom */
+  -webkit-box-shadow: 0 0 10px #888;
+  -moz-box-shadow: 0 0 10px #888;
+  box-shadow: 0 0 10px #888;
+  /* rotate 旋转45度 */
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  /* position */
+  left: -50px;
+  top: 40px;
+}
+
+.ribbon a {
+  border: 1px solid #faa;
+  color: #fff;
+  display: block;
+  /* font: bold 81.25% "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  margin: 1px 0;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  /* shadow */
+  text-shadow: 0 0 5px #444;
+}    
+</style>
+
+<!-- demo5占位符 -->
+<div>
+    <input type="text" placeholder="文本提示啦啦啦input 占位符" class="placeholder">
+</div>
+<style>
+input::-webkit-input-placeholder {
+  color: green;
+  background-color: #f9f7f7;
+  font-size: 14px;
+}
+input::-moz-input-placeholder {
+  color: green;
+  background-color: #f9f7f7;
+  font-size: 14px;
+}
+input::-ms-input-placeholder {
+  color: green;
+  background-color: #f9f7f7;
+  font-size: 14px;
+}
+</style>
+<!-- https://mp.weixin.qq.com/s/mRush4DLWe5xFSxSohJ4IA 多种css -->
+
+

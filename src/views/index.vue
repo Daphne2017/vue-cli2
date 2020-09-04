@@ -26,9 +26,9 @@
 </template>
 <script>
 export default {
-  data(){
+  data () {
     return {
-            linklist: [
+      linklist: [
         {
           link: 'mock',
           name: 'mock的demo'
@@ -68,6 +68,14 @@ export default {
         {
           link: 'marquee',
           name: '跑马灯的实现'
+        },
+        {
+          link: 'uploadImage',
+          name: '图片上传'
+        },
+        {
+          link: 'canvasCard',
+          name: 'canvas画图'
         }
       ]
     }
