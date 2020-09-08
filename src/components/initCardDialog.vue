@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {drawCard} from '../../utils/card-tools'
+import {drawCard, headBgClipDialog } from '../../utils/my-card-tools'
 // https://www.runoob.com/jsref/dom-obj-canvas.html  canvas学习路径
 // https://www.runoob.com/tags/ref-canvas.html
 export default {
@@ -130,7 +130,6 @@ export default {
             }
           }
         }
-
       })
 
       contents.push({
@@ -186,61 +185,20 @@ export default {
         }
       })
       contents.push({
-        type: 'singleText',
-        text: '帮助',
+        type: 'singleTextSpace',
+        text: '单行文字隔开单行文字隔开单行文字隔开单行文字隔开单行文字隔开',
         style: {
-          top: 820,
+          top: 800,
           left: 42,
           font: 33,
           color: '#fff',
           fontWeight: 'bold',
-          suffix: {
-            lSpace: 10,
-            text: liveStudyNum,
-            font: 56,
-            color: '#FFB315',
-            fontWeight: 'bold',
-            suffix: {
-              lSpace: 10,
-              text: '名学员',
-              font: 33,
-              color: '#fff',
-              fontWeight: 'bold'
-            }
-          }
-
+          spaceWidth: 10,
         }
       })
-      // contents.push({
-      //   type: 'singleText',
-      //   text: '收获',
-      //   style: {
-      //     top: 905,
-      //     left: 42,
-      //     font: 33,
-      //     color: '#fff',
-      //     fontWeight: 'bold',
-      //     suffix: {
-      //       lSpace: 10,
-      //       text: liveFansNum,
-      //       font: 56,
-      //       color: '#FFB315',
-      //       fontWeight: 'bold',
-      //       suffix: {
-      //         lSpace: 10,
-      //         text: '名铁杆粉丝',
-      //         font: 33,
-      //         color: '#fff',
-      //         fontWeight: 'bold'
-      //       }
-      //     }
-      //   }
-      // })
-      // left, top, width, maxLine, lineHeight, font, color, fontWeight, bolder
-
       contents.push({
         type: 'multiText',
-        text: '测试多行多行多行 多行测试多行 多行多行多行',
+        text: '测试多行多行多行多行测试多行多测试多行多行多行多行测试多行多行多行多行行多行多行',
         style: {
           top: 905,
           left: 42,
@@ -248,6 +206,7 @@ export default {
           maxLine: 3,
           font: 33,
           color: '#fff',
+          lineHeight: 34,
           fontWeight: 'bold'
         }
       })

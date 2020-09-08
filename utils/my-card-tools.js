@@ -7,6 +7,7 @@
 
 /*
 多行文字显示，可指定文本位置，最大行数，宽度，行高
+这个写得真是好
 distX, distY,width, maxLine, lineHeight
 */
 /**
@@ -27,32 +28,28 @@ distX, distY,width, maxLine, lineHeight
  * @param {string} fontFamiry   字体，可选，默认值微软雅黑
  */
 function multiText (ctx, text, textObj, fontFamiry = '微软雅黑') {
-  let { left, top, width, maxLine, lineHeight, font, color, fontWeight, bolder } = textObj
+  let { left, top, width, maxLine, lineHeight = '20', font, color, fontWeight, bolder } = textObj
   ctx.save()
   ctx.font = (fontWeight ? (fontWeight + ' ') : '') + font + 'px ' + fontFamiry
   ctx.fillStyle = color
-  var words = text.split('') // 为什么要一个一个字拆开
+  var words = text.split('')
   var line = ''
   var lines = 1
-  console.log('texttexttext', text)
-  console.log('wordswords', words)
-  console.log('line', line)
-  console.log('lines', lines)
-  console.log('ctx.measureText(line).width', ctx.measureText(line).width)
+
   for (var i = 0; i < words.length; i++) {
-    line += words[i]
+    line += words[i] //  循环去累加文字
     /* 文字内容全部取完，直接绘制文字 */
-    if (i === words.length - 1) {
+    if (i === words.length - 1) { // 如果所有文字总数的宽度没有累加达到设置的宽度，那就一行画完
       ctx.fillText(line, left, top, width)
       break
     }
-    if (ctx.measureText(line).width >= width) {+
+    if (ctx.measureText(line).width >= width) { // 如果当前行文字的宽度已经超出了限制的宽度就换行
       /* 已经到达最大行数，用省略号代替后面的部分 */
-      if (lines === maxLine) {
+      if (lines === maxLine) { // 达到当前设置的最大行数就加省略号
         line = line.slice(0, line.length - 3) + '...'
       }
-      ctx.fillText(line, left, top, width)
-      if (lines === maxLine) {
+      ctx.fillText(line, left, top, width) // 开始画当前一行
+      if (lines === maxLine) { // 已经等于最大的行数了，就不在往后画了
         break
       }
       line = ''
@@ -159,7 +156,7 @@ function drawText (ctx, text, textObj, fontFamiry = '微软雅黑') {
 }
 
 /**
-* 绘制单行文本,可以指定字的宽度
+* 绘制单行文本,可以指定字的大小
 * @param {any} ctx        canvas 的 getContext('2d')
 * @param {string} str     文本
 * @param {object} textObj 文本显示样式设置
@@ -173,12 +170,15 @@ function drawText (ctx, text, textObj, fontFamiry = '微软雅黑') {
 * @param {string} fontFamiry    字体，可选，默认值微软雅黑
 */
 function drawTextSpace (ctx, str, textObj, fontFamiry = '微软雅黑') {
-  let { x, y, spaceWidth, font, color, bolder } = textObj
+  let { left, top, font, color, fontWeight, spaceWidth } = textObj
   var strArray = str.split('')
+  var textLeft = left
   for (var i = 0; i < strArray.length; i++) {
-    ctx.font = (bolder ? 'bold ' : '') + font + 'px ' + fontFamiry
+    ctx.font = (fontWeight ? (fontWeight + ' ') : '') + font + 'px ' + fontFamiry
     ctx.fillStyle = color
-    ctx.fillText(strArray[i], x + spaceWidth * i, y)
+    textLeft += (i === 0 ? 0 : ctx.measureText(strArray[i - 1]).width) + spaceWidth
+    console.log('textLeft', textLeft)
+    ctx.fillText(strArray[i], textLeft, top)
   }
 }
 
@@ -550,7 +550,8 @@ function drawCard ({
   cb // 图片加载之后的回调
 }) {
   if (!canvas) { // 先判断canvas是否存在
-    canvas = document.createElement('canvas')
+    
+     = document.createElement('canvas')
   }
 
   if (bgUrl) { //  是否需要背景图
@@ -614,6 +615,14 @@ function generate (ctx, content, cb) {
     case 'block':
       headBgClipRounded(
         ctx,
+        content.style
+      )
+      cb && cb()
+      break
+    case 'singleTextSpace':
+      drawTextSpace(
+        ctx,
+        content.text,
         content.style
       )
       cb && cb()
