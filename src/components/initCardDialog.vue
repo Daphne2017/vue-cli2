@@ -193,7 +193,7 @@ export default {
           font: 33,
           color: '#fff',
           fontWeight: 'bold',
-          spaceWidth: 10,
+          spaceWidth: 10
         }
       })
       contents.push({

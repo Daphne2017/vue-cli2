@@ -550,8 +550,7 @@ function drawCard ({
   cb // 图片加载之后的回调
 }) {
   if (!canvas) { // 先判断canvas是否存在
-    
-     = document.createElement('canvas')
+    canvas = document.createElement('canvas')
   }
 
   if (bgUrl) { //  是否需要背景图
