@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<div>
+	<a href="" id="123">下载la </a>
+</div>
+
+<script>
+    const a = document.getElementById('123')
+    a.addEventListener('click',function(){
+			downloadCSV()
+    })
+/*
+*注：csv文件：","逗号换列，\n换行
+*/
+function downloadCSV() {
+	const filename = '模板下载.csv'
+    const table = {
+			csvTitle: ['用户昵称'],
+			csvFilter: ['nickName'],
+			csvList: [{nickName:'测试用户1'},{nickName:'测试用户2'},{nickName:'测试用户3'},]
+        }
+		const { csvTitle,csvFilter,csvList} = table
+
+    const csvData = [];
+    csvData.push('' + csvTitle.join(',') + '\n');
+    for (let i = 0; i < csvList.length; i++) {
+        const tmp = [];
+　　　　　for (let j = 0; j < csvFilter.length; j++) {
+        　　const d = csvList[i][csvFilter[j]];
+        　　tmp.push(d);
+    　　}
+    　　csvData.push('' + tmp.join(',') + '\n');
+     }
+    const file = new Blob(["\ufeff" + csvData.join('')], { type: 'text/csv;charset=utf-8' });
+    if (window.navigator.msSaveOrOpenBlob)
+      // IE10+
+      window.navigator.msSaveOrOpenBlob(file, filename);
+    else {
+      // Others
+      const a = document.createElement("a");
+        url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    }
+  }
+
+</script>

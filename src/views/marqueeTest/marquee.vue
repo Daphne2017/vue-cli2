@@ -1,7 +1,7 @@
  <template>
   <div>
     <!-- <marquee :send-val='msg' v-if='msg'/> -->
-    <marqueeX :send-val='msg' v-if='msg'/>
+    <!-- <marqueeX :send-val='msg' v-if='msg'/> -->
     <marqueeY :send-val='comment' v-if='comment'/>
     <!-- <marqueeTest :send-val='msg' v-if='msg'/> -->
 

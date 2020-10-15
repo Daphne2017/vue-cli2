@@ -8,46 +8,52 @@
                 </div>
                 <div class="my-content">{{item.content}}</div>
             </div>
-            <div class="my-listbox" v-for="(item,index) in sendVal" :key='(index+1)*100' v-if='isShow'>
-                <div class="my-title">
-                    {{item.name}}<text class="my-utel">{{item.mobile}}</text>
-                    <text class="my-addr">{{item.place}}</text>
+            <div v-if='isShow'>
+                <div class="my-listbox" v-for="(item,index) in sendVal" :key='(index+1)*100' >
+                    <div class="my-title">
+                        {{item.name}}<text class="my-utel">{{item.mobile}}</text>
+                        <text class="my-addr">{{item.place}}</text>
+                    </div>
+                    <div class="my-content">{{item.content}}</div>
                 </div>
-                <div class="my-content">{{item.content}}</div>
             </div>
+
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name:'my-marquee-top',
-        props:{        
-            sendVal:Array
-        },
-        data() {
-            return {
-                isShow:true
-            }
-        }, 
-        mounted:function(){
-            var moveTarget = this.$refs.movebox;
-            var outbox = this.$refs.outbox;
-            if(outbox.offsetHeight > (moveTarget.offsetHeight /2)){
-                this.isShow = false;
-                return
-            }
-            var initTop = 0;
-            setInterval(function(){
-                initTop ++;
-                if(initTop >= moveTarget.offsetHeight / 2 ){
-                    initTop = 0;
-                }
-                moveTarget.style = 'transform: translateY(-'+ initTop +'px)';
-              
-            },16)
-        },
+export default {
+  name: 'my-marquee-top',
+  props: {
+    sendVal: Array
+  },
+  data () {
+    return {
+      isShow: true
     }
+  },
+  mounted: function () {
+    var moveTarget = this.$refs.movebox
+    var outbox = this.$refs.outbox
+    if (outbox.offsetHeight > (moveTarget.offsetHeight / 2)) {
+      this.isShow = false
+      return
+    }
+    var initTop = 0
+    const timer = setInterval(function () {
+      initTop++
+      if (initTop >= moveTarget.offsetHeight / 2) {
+        initTop = 0
+      }
+      moveTarget.style = 'transform: translateY(-' + initTop + 'px)'
+    }, 16)
+    this.$once('hook:beforeDestroy', () => {
+      clearInterval(timer)
+    })
+  }
+
+}
 </script>
 
 <style lang="less" scoped>
