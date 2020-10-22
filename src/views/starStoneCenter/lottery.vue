@@ -62,7 +62,7 @@ export default {
   name: 'HelpFeedBack',
   components: {
     MarqueeY,
-    Alert,
+    Alert
   },
   data () {
     const initPrizeParams = {
@@ -72,7 +72,7 @@ export default {
       speed: 200, // 初始转动速度
       currentTimes: 0, // 当前转动次数
       baseTimes: 5, // 基本转动次数
-      prizeIndex: -1, // 中奖位置，接口返回
+      prizeIndex: -1 // 中奖位置，接口返回
 
     }
     return {
@@ -83,7 +83,7 @@ export default {
         residueCount: 0, // 剩余抽奖次数
         selfCash: '?', // 用户累计中奖金额
         toTarget: '?',
-        isShare: false, // 是否已分享过
+        isShare: false // 是否已分享过
       }, // 用户信息
       margueeList: [], // 中奖播报列表
       prizeList: [], // 奖品1-6
@@ -95,8 +95,8 @@ export default {
       prizeInfo: {}, // 中奖接口返回后不能立马更新用户账户，等待中奖弹框弹出后才更新
       ruleParams: {
         maxCount: 0,
-        expend: 0,
-      },
+        expend: 0
+      }
     }
   },
   mounted () {
@@ -111,7 +111,7 @@ export default {
       } else { // 中奖后更新用户账户信息
         this.updateUserInfo('prize') // 中奖更新用户累计红包信息、按钮、播报列表
       }
-    },
+    }
   },
   computed: {
     /* 切换按钮状态 */
@@ -132,7 +132,7 @@ export default {
         }
       }
       return btnClass
-    },
+    }
   },
   methods: {
     setShareInfo (resourceUrl) {
@@ -141,7 +141,7 @@ export default {
         shareTitle: '千元红包等你来拿！',
         shareDesc: '抽奖红包拿到手软，满一千元可提现',
         shareLink: 'https://www.huoxingtang.com',
-        shareImgUrl: 'https://static.huoxingtang.com/admin/uploaded-files/production/richTextImage/2020-09-28T17-19-30-2ccb.png',
+        shareImgUrl: 'https://static.huoxingtang.com/admin/uploaded-files/production/richTextImage/2020-09-28T17-19-30-2ccb.png'
       })
     },
     /* 初始化页面 */
@@ -247,8 +247,8 @@ export default {
       index += 1;
       (index > this.prizeParams.prizeCount - 1) && (index = 0)
       this.prizeParams.currentIndex = index // 激活当前位置
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -1,0 +1,20 @@
+屏幕尺寸：指的是屏幕对角线的长度
+
+在CSS规范中，长度单位可以分为两类，绝对(absolute)单位以及相对(relative)单位。px是一个相对单位，相对的是设备像素(device pixel)。
+在同样一个设备上，每1个CSS像素所代表的物理像素是可以变化的(即CSS像素的第一方面的相对性); 
+在不同的设备之间，每1个CSS像素所代表的物理像素是可以变化的(即CSS像素的第二方面的相对性);
+window.devicepixelRatio
+设备像素比：dpr=window.devicePixelRatio，也就是设备的物理像素与逻辑像素的比值。
+
+在retina屏的手机上, dpr为2或3，css里写的1px宽度映射到物理像素上就有2px或3px宽度。
+
+Flexible方案已不是什么神秘的方案了，借助JavaScript来动态修改meta标签中viewport中的initial-scale的值，然后根据dpr修改html中的font-size值，再使用rem来处理。有关于这方面的详细使用可以阅读早期整理的文章《使用Flexible实现手淘H5页面的终端适配》。
+
+但是话说回来，这个方案目前只处理了iOS的dpr为2的情况，其他的都没有处理，也就是说不支持Android和drp=3的情况。对于追求完美的同学来说，这是无法接受的。
+
+有问题，总是有解决方案的，有同学做过方面的详细探索。那么跟着其思路也重新撸了一回。先回到Fleible中，其实现原理，大家都知道的。让viewport放大为device-width的dpr倍数，然后缩小1/dpr倍显示。
+
+
+https://www.cnblogs.com/cench/p/5314044.html
+https://segmentfault.com/a/1190000017784801
+https://segmentfault.com/a/1190000017784801 不要再问我移动适配的问题了

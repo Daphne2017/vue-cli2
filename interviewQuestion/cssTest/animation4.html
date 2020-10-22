@@ -8,13 +8,13 @@
 <body>
     <div class="content">
         <div class="yudi">
-
         </div>
     </div>
 </body>
 </html>
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
+
     let $content = $(".content");
     let number = 0;
     for (let index = 0; index < 30; index++) {
@@ -34,16 +34,16 @@
 <style>
     html,body{
         height: 100%;/*百分百填充*/
+        height: 100vh;
     }
     .content{
         position: relative;
         height: 100%;
-        background:#f2f2f2;
     }
     .content .yudi{
         opacity: 0;
         position: absolute;
-        /* animation:drops 1.2s cubic-bezier(0.6, 0.05, 0.53, 0.68) infinite; */
+        animation:drops 1.2s cubic-bezier(0.6, 0.05, 0.53, 0.68) infinite;
         /* 落雨样式 */
         /* width: 2px;
         height: 4px;
