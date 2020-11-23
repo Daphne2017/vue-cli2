@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body{
+        width: 100vw;
+        height: 100vh;
+        background: #34495e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    div{
+        width: 100px;
+        height: 100px;
+        background: #e67e22;
+        border-radius: 50%;
+        animation: ball 1s infinite alternate-reverse
+    }
+    section{
+        width: 300px;
+        height: 40px;
+        background: rgba(0,0,0,.3);
+        position: absolute;
+        transform: translateY(50px);
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(5px);
+        animation: shadow 1s infinite alternate-reverse
+    }
+    @keyframes shadow {
+        to{
+            width: 300px;
+            height: 20px;
+            background: rgba(0,0,0,.1);  /* 球离得远的时候就开始慢慢变透明 */
+            filter: blur(35px); /* 球离得远的时候就开始慢慢变模糊*/
+        }
+    }
+    @keyframes ball {
+        to{
+            transform: translateY(-300px);
+        }
+    }
+</style>
+<body>
+    <div></div>
+    <section></section>  <!-- 添加阴影 -->
+</body>
+<!-- 
+
+    animation-direction 用户控制动画的方向
+    normal：动画时间内慢慢0%-100%，然后一瞬间回去初始状态，默认是从开始到结束
+    alternate：动画时间内慢慢0%-100%，然后慢慢100%-0%，设置交替执行
+    reverse：动画时间内慢慢从100%-0%，然后一瞬间回到100的状态，设置反向
+    alternate-reverse：动画时间内慢慢100%-0%，然后慢慢从0%-100%
+-->
+</html>

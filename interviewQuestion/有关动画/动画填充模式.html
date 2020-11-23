@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        width: 100vw;
+        height: 100vh;
+        background: #2c3e50;
+        display: grid;
+    }
+    ul{
+        list-style: none;
+        background: #000;
+        width: 400px;
+        height: 100px;
+        align-self: center;
+        justify-self: center;
+        display: grid;
+        grid-template: 1fr/repeat(4,1fr);
+    }
+    li{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #e67e22;
+        animation-duration: 2s;
+        animation-delay: 2s;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+
+    }
+    li:nth-child(1){
+        animation-name: hd; /*起始是默认状态，延迟2s之后，就开始改变，最后回到默认状态 */
+        
+    }
+    li:nth-child(2){
+        animation-name: hd;
+        animation-fill-mode: backwards;  /* 延迟2s的过程中，使用的是第一帧，最后回到默认状态 */
+        
+    }
+    li:nth-child(3){
+        animation-name: hd;
+        animation-fill-mode: forwards;  /* 起始是默认状态，延迟2s之后，就开始改变，最后保持在100%的状态 */
+        
+    }
+    li:nth-child(4){
+        animation-name: hd;
+        animation-fill-mode: both;  /* 起始是from的0帧，结束的时候是100帧 */
+        
+    }
+    @keyframes hd {
+        from{
+            transform: scale(0);
+        }
+        to{
+            transform: scale(1);
+            background: #2ecc71;
+        }
+        
+    }
+</style>
+<body>
+    <ul>
+        <li>normal</li>
+        <li>backwards</li>
+        <li>forwards</li>
+        <li>both</li>
+    </ul>
+</body>
+<!-- 
+
+组合定义语法：
+先动画时间，后延迟时间，其他的属性位置可以随意放
+
+animation:hd backwards 2s 2s
+ -->
+</html>

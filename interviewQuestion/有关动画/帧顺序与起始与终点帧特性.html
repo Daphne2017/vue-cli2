@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-color: #34495E;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        main{
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            animation-name:hd;
+            animation-duration: 2s;
+        }
+        /* 1、from动画开始:0%，to动画结束100%
+            2、帧动画与帧的百分比设置顺序无关
+            3、0%如果不写，那么使用的是元素的初始状态（目前这么理解，暂不涉及延迟）
+            4、100%不写，使用的也是元素的初始状态（目前这么理解，暂不涉及延迟）
+
+        
+        */
+        @keyframes hd{
+            0%{
+                background: white
+            } 
+           
+            100%{
+                background: #e74c3c;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+
+    </main>
+</body>
+</html>

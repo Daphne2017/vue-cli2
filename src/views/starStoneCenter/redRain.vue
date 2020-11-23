@@ -179,6 +179,10 @@ export default {
     bottom: 0;
     margin: auto;
 }
+.center2{
+    position: relative;
+    margin: auto;
+}
 // 子级居中
  .parent{
     display: flex;

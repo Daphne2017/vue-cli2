@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body{
+        }
+        main{
+            width: 100vw;
+            height: 100vh;
+            transform: scale(0);
+            animation-name: scale;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 1; /* 控制动画的次数 */
+          
+        }
+        @keyframes scale{
+           
+            25%{
+                transform: scale(0.5);
+            }
+            50%{
+                transform: translate(300px,300px);
+            }
+            75%{
+                transform: translateY(300px);
+            }
+          
+        }
+        @keyframes bg{
+           25%{
+               background:rgb(236, 31, 192)
+           }
+           50%{
+            background:rgb(109, 31, 236)
+           }
+           75%{
+            background:rgb(134, 209, 14)
+           }
+         
+       }
+       @keyframes radius{
+           25%{
+            border-radius:50%
+           }
+           50%{
+            border-radius:0%
+           }
+           75%{
+            border-radius:50%
+           }
+       }
+
+    </style>
+</head>
+<body>
+    <input  type="number" step="0.01"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">
+    <main>
+        <div></div>
+    </main>
+</body>
+</html>
+
+<!-- 
+
+有中间值的属性才可以产生动画
+
+ -->

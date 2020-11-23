@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body{
+        width: 100vw;
+        height: 100vh;
+        background: #34495e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .heart{
+        width: 200px;
+        height: 200px;
+        background: #e74c3c;
+        transform: rotate(45deg) scale(.5);
+        animation: hd 2s infinite;
+    }
+    @keyframes hd {
+        25%{
+            transform: rotate(45deg)  scale(1);
+        }
+        50%{
+            transform: rotate(45deg)  scale(.5);
+        }
+        75%{
+            transform: rotate(45deg)  scale(1);
+        }
+        85%{
+            transform: rotate(45deg)  scale(.5);
+        }
+        to{
+            transform: rotate(45deg)  scale(1
+            );
+        }
+    }
+    .heart::before{
+        content: '';
+        width: 200px;
+        height: 200px;
+        background: #e74c3c;
+        border-radius: 50%;
+        position: absolute;
+        background: #e74c3c;
+        transform: translateX(-100px);
+    }
+    .heart::after{
+        content: '';
+        width: 200px;
+        height: 200px;
+        background: #e74c3c;
+        border-radius: 50%;
+        position: absolute;
+        background: #e74c3c;
+        transform: translateY(-100px);
+    }
+</style>
+<body>
+   <div class="heart">
+
+   </div>
+</body>
+<!-- 
+
+    animation-direction 用户控制动画的方向
+    normal：动画时间内慢慢0%-100%，然后一瞬间回去初始状态
+    alternate：动画时间内慢慢0%-100%，然后慢慢100%-0%
+    reverse：动画时间内慢慢从100%-0%，然后一瞬间回到100的状态
+    alternate-reverse：动画时间内慢慢100%-0%，然后慢慢从0%-100%
+-->
+</html>

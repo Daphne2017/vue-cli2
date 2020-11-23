@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id='drawing' style="border:1px solid #d3d3d3;"></canvas>
+</body>
+
+</html>
+<script>
+    let drawing = document.getElementById("drawing");
+    //设置画布的宽高
+    drawing.width = 640
+    drawing.height = 1136
+    // 确保浏览器支持<canvas>
+    if (drawing.getContext) {
+    let context = drawing.getContext("2d");
+    context.strokeStyle = "red"; // 笔尖颜色，即线条颜色
+    context.fillStyle = "#0000ff"; // 填充颜色
+    }
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<script>
+    // start 记录的是第一次调用step函数的时间点，用于计算与第一次调用step函数的时间差，以毫秒为单位
+    let start = 0;
+    // lastTime 记录的是上一次调用step函数的时间点，用于计算两帧之间的时间差，以毫秒为单位
+    let lastTime = 0;
+    // count用于记录step函数运行次数
+    let count =0;
+    
+    /**
+    *  step 函数用于计算：
+    *  1、获取当前时间点与ＨＴＭＬ程序启动时的时间差: timestamp
+    * 2、　获取当前时间点与第一次调用step时的时间差: elapedMsec
+    * 3、　获取当前时间点与上一次调用step时的时间差: intervalMsec
+    *  step函数是作为requestAnimationFrame方法的回调函数使用的
+    * 因此step函数的签名必须是(timestamp: number) => void
+    * 
+    */
+    
+    function step (timestamp) {
+      // 第一次调用本函数时，设置start 和latsTime为timestamp;
+    //   if(!start) start = timestamp;
+    //   if(!lastTime) lastTime = timestamp
+      
+    //   // 计算当前时间点与第一次调用step时间点的差
+    //   let elapsedMsec = timestamp - start;
+    //   // 计算当前时间点与上次调用step时间点的差(可以理解为两帧之间的时间差)
+    //   let intervalMsec = timestamp -lastTime;
+    //   // 记录上一次时间戳
+    //   lastTime = timestamp;
+    //   // 计数器，用于记录step函数被调用的次数
+    //   count ++ ;
+    //   console.log(" " + count + "timestamp = " + timestamp)
+    //   console.log(" " + count + "elapsedMsec = " + elapsedMsec)
+    //   console.log(" " + count + "intervalMsec= " + intervalMsec)
+    for(let i=0;i++;i<10000000000000){}
+      // 使用requestAnimationFrame调用step函数
+      window.requestAnimationFrame(step);
+      
+    }
+    
+    // 使用requestAnimationFrame启动step
+    // 而step函数中又会调用requestAnimationFrame来回调step函数
+    // 从而形成不间断地递归调用，驱动动画不停运行
+    window.requestAnimationFrame(step)
+</script>
+</body>
+https://zhuanlan.zhihu.com/p/266252723  知乎文章
+由此可见，requestAnimationFrame方法会稳定间隔时间：
+
+● 如果当前的回调操作（step函数）在16.66毫米内能完成，那么requestAnimationFrame会等到16.66毫秒时继续下一次step回调函数的调用。
+
+● 如果当前的回调操作（step函数）大于16.66毫秒，则会以16.66毫秒为倍数的时间间隔进行下一次step回调函数的调用。
+
+● 当将监视器屏幕刷新频率60赫兹设置成48赫兹时，结果也类似，两帧之间间隔时间总是20.83毫秒的倍数。
+
+</html>

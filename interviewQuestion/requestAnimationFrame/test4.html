@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>应用requestAnimationFrame做一个动画效果</title>
+    <style type="text/css">
+        .ball{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        .red{
+            background-color: red;
+        }
+        .green{
+            background-color: green;
+        }
+        .blue{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <p>在看node教程，老师介绍promise时，用seTtimeout实现了一个动画效果，用requestAnimationFrame练练手</p>
+    <div>
+        <p class="ball red" style="margin-left:0px;"></p>
+        <p class="ball green" style="margin-left:0px;"></p>
+        <p class="ball blue" style="margin-left:0px;"></p>
+    </div>
+<script type="text/javascript">
+        var red = document.querySelector(".red");
+        var green = document.querySelector(".green");
+        var blue = document.querySelector(".blue");
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+        ani(red,100,function(){
+            ani(green,200,function(){
+                ani(blue,150,function(){
+                    ani(red,150);
+                    ani(green,150)
+                })
+            })
+        })
+        function ani(node,to,callback){
+            var marginLeft = parseInt(node.style.marginLeft);
+            requestAnimationFrame(function(){
+                if (marginLeft == to) {
+                    callback && callback()
+                }else{
+                    if (marginLeft < to) {
+                        marginLeft++
+                    }else if(marginLeft>to){
+                        marginLeft--
+                    }
+                    node.style.marginLeft = marginLeft + "px";
+                    ani(node,to,callback)
+                }
+            })  
+        }
+    </script>
+</body>
+</html>

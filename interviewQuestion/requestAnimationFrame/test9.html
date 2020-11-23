@@ -1,0 +1,11 @@
+let step = (timestamp, elapsed) => {
+    if (elapsed > 1000 / 7) {
+        //TO DO SOMETHING
+        elapsed = 0
+    }
+    
+    window.requestAnimationFrame(
+        _timestamp => step(_timestamp, elapsed + _timestamp - timestamp)
+    )
+}
+window.requestAnimationFrame(timestamp => step(timestamp, 0))

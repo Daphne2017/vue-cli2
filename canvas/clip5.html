@@ -19,6 +19,7 @@
     ctx.beginPath()
     ctx.rect(0,0,400,500)
     ctx.fillStyle = 'pink'
+    ctx.strokeStyle = 'red'
     ctx.fill()
     // ctx.fillRect(0,0,400,500)
 
@@ -26,6 +27,7 @@
 
     ctx.beginPath() // 重置路线进行裁剪
     ctx.arc(200,200,100,0,Math.PI*2,false) // 绘制圆
+    // ctx.fill(); // 画圆填充颜色(粉色)
     ctx.stroke(); // 画圆不填充颜色
     // ctx.fillStyle = 'yellow'
     // ctx.fill()

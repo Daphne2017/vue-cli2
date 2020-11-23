@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+        #tsj {
+            width: 100px;
+            height: 150px;
+            background: url(../../images/renwu.jpeg) no-repeat;
+            background-size: 800%;
+            animation: personBlast .8s steps(7) infinite;
+        }
+        @keyframes personBlast {
+            0% {
+                background-position: left;
+            }
+
+            100% {
+                background-position: right;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tsj">
+
+    </div>
+</body>
+
+</html>

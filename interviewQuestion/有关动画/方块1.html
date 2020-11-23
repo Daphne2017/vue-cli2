@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /*自定义变量，跟动画无关*/
+
+    :root{   
+
+    --time: 10s;   
+
+    }
+    @keyframes move {
+        from {
+            background: purple;
+            /*紫色*/
+        }
+
+        50% {
+            background: blue;
+            /*蓝色*/
+        }
+
+        100% {
+            background: red;
+            /*红色*/
+        }
+    }
+
+    /*第一个方块*/
+    .step {
+        margin-right: 10px;
+        animation: move var(--time) steps(1, start) infinite;
+    }
+
+    /*第二个方块*/
+    .step2 {
+        animation: move var(--time) steps(3, end) infinite;
+    }
+
+    .content {
+        display: flex;
+    }
+
+    .step,
+    .step2 {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<body>
+    <div class="content">
+        <div class="step">step-start</div>
+        <div class="step2">step-end</div>
+    </div>
+
+</body>
+
+</html>

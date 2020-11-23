@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-color: #34495E;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        main{
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            animation-name:hd;
+            animation-duration: 2s;
+        }
+        /* from动画开始:0%，to动画结束100%*/
+        @keyframes hd{
+            0%{
+                background: white
+            } 
+            25%{
+                transform: scale(2);
+            }
+            65%{
+                transform: scale(1);
+                background: #9b59b6;
+            }
+            100%{
+                background: #e74c3c;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+
+    </main>
+</body>
+</html>
+<!-- 
+    第一个参数 number 为指定的间隔数，即把动画分为n步阶段性展示
+    第二个参数默认是end，设置最后一步的状态
+    start 第一帧是第一步动画结束
+    end  第一帧是第一步动画开始
+    steps 函数指定了一个阶跃函数
+    第一个参数指定了时间函数中的间隔数量（必须是正整数）；
+    第二个参数可选，接受 start 和 end 两个值，指定在每个间隔的起点或是终点发生阶跃变化，默认为 end。
+    easa linear cubic-bezier之类的过渡函数都会为其插入补间。但有些效果不需要补间，只需要关联关键帧之间的跳跃，这时应使用steps过渡方式
+    steps(1,start) 动画分成1步，动画执行时为开始左侧端点的部分开始。
+    steps(1,end)  动画分成1步，动画执行时以结尾端点为开始，默认值end
+    steps的设置都是针对两个关键帧之间的，而非是整个keyframes
+    step-start在变化过程中，都是以下一帧的显示效果来填充间隔动画，所以0% 到 50%  直接就显示了黄色yellow
+    step-end与上面相反，都是以上一帧的显示效果来填充间隔动画，所以0% 到 50% 直接就显示了红色red
+ -->

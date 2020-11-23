@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.div01{
+		border: 1px solid #f00;
+		width: 200px;
+		height: 200px;
+		position: absolute;
+	}
+	/* .div01::after{
+	position: absolute;  
+    content: ''; 
+	width:0; height:0; font-size:0; overflow:hidden; position:absolute;
+    border-width:8px; 
+    border-style:solid dashed dashed; 
+	border-color: transparent transparent #ffffff; 
+	top:-15px; 
+    left:103px; 
+} */
+.div01::before{
+	position: absolute;  
+    content: ''; 
+	width:0; height:0; font-size:0; overflow:hidden; position:absolute;
+    border-width:8px; 
+    border-style:solid dashed dashed; 
+	border-color: transparent transparent #ffffff; 
+	top:-16px; 
+    left:103px;	
+}
+	</style>
+</head>
+<body>
+ 
+<div class="div01"></div>
+ 
+</body>
+</html>

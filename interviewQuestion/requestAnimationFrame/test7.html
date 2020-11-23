@@ -1,0 +1,14 @@
+
+<script>
+    let step = (timestamp, elapsed) => {
+        if (elapsed > 1000 / 7) {
+           console.log(1111111111);
+        elapsed = 0
+        }
+        
+        requestAnimationFrame(
+            _timestamp => step(_timestamp, elapsed + _timestamp - timestamp)
+        )
+    }
+    requestAnimationFrame(timestamp => step(timestamp, 0))
+</script>

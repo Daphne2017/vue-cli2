@@ -14,8 +14,8 @@
     var ctx = canvas.getContext('2d');
 
     //设置画布的宽高
-    canvas.width = 500;
-    canvas.height = 500;
+    canvas.width = 200;
+    canvas.height = 200;
 
     // 坐标转换工具函数
     function getCircleXY(canvas,x,y){
@@ -27,7 +27,7 @@
     }
 
     ctx.beginPath()
-    ctx.fillStyle = '#000'
+    ctx.fillStyle = 'gray'
     ctx.fillRect(0,0,500,500)
 
     // 注册canvas的监听事件
@@ -35,8 +35,8 @@
 
         // 每次触发都重新创造黑暗环境
         ctx.beginPath()
-        // ctx.fillStyle = '#000' 
-        // ctx.fillRect(0,0, canvas.width, canvas.height)
+        ctx.fillStyle = 'gray' 
+        ctx.fillRect(0,0, canvas.width, canvas.height)
 
         // clip()前保存原始环境
         ctx.save()
@@ -51,7 +51,7 @@
         ctx.font = 'bold 50px Serif'
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
-        ctx.fillText('Canvas实现手电筒照明效果', canvas.width/2, canvas.height/2) // 填充文本
+        ctx.fillText('谢谢惠顾', canvas.width/2, canvas.height/2) // 填充文本
         ctx.restore()
 
     })

@@ -1,0 +1,21 @@
+<!-- <script>
+    let S = 0;
+    function fun() {
+        document.write("定时器"+"<br>");
+//        发起下一次fun执行请求
+        requestAnimationFrame(fun);
+        S++;
+    }
+//    开启函数fun第一次执行
+    fun();
+</script> -->
+<script>
+    function fun() {
+        for(let i = 0;i<1000000000;i++){
+            //借助for循环多次执行延时
+        }
+        document.write("定时器"+"<br>");
+        requestAnimationFrame(fun);
+    }
+    fun();
+</script>

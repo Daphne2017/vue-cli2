@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id='drawing' style="border:1px solid #d3d3d3;"></canvas>
+</body>
+
+</html>
+<!-- 所有这些变换，包括 fillStyle 和 strokeStyle 属性，会一直保留在上下文中，直到再次修改它们 -->
+<script>
+    let drawing = document.getElementById("drawing");
+    //设置画布的宽高
+    drawing.width = 640
+    drawing.height = 1136
+    // 确保浏览器支持<canvas>
+    if (drawing.getContext) {
+        let context = drawing.getContext("2d");
+        context.fillStyle = "#ff0000";
+        context.save();
+        context.fillStyle = "#00ff00";
+        context.translate(100, 100);
+        context.save();
+        context.fillStyle = "#0000ff";
+        context.fillRect(0, 0, 100, 200); // 在(100, 100)绘制蓝色矩形
+        context.restore();
+        context.fillRect(10, 10, 100, 200); // 在(100, 100)绘制绿色矩形
+        context.restore();
+        context.fillRect(0, 0, 100, 200); // 在(0, 0)绘制红色矩形
+    }
+</script>

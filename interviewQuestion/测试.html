@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .qrcode {
+            margin-bottom: 4px;
+            padding-top: 10px;
+        }
+        .qrcode img {
+            width: 260px;
+            height: 255px;
+            padding-top: 20px;
+            margin-bottom: 10px;
+        }
+        .qrcode .blur{
+            /* -webkit-backface-visibility: hidden; */
+            animation: toReal 2s;
+        }
+        @keyframes toReal {
+            from {
+                filter: blur(80px);
+            }
+            to {
+                filter: blur(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="qrcode">
+    <img src="http://ab-static.huoxingtang.com/admin/uploaded-files/local/default/2020-11-16T17-58-45-aa1a.png" class="blur" />
+</div>
+</body>
+</html>

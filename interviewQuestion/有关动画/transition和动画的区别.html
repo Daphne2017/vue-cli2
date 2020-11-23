@@ -1,0 +1,11 @@
+transition:transition需要触发条件，例如伪类hover，媒体查询或者JavaScript，没有触发条件是不会发生效果的
+不能在transition上直接设置或者修改css属性，只能在选择器上设置css属性，然后在transition上设置全部过渡还是具体属性过渡，
+不能循环某一个动作
+transition: bg 1s linear 0s 
+如果要过渡全部属性，可以把bg改为all
+如果想分别设置多个属性的不同效果，可以使用逗号来分隔，
+例如：
+transition：bg 1s linear 0s,font-size 1.5s ease-in
+需要注意的是过渡是一次性的，不能循环
+
+animation：不触发的时候也会相应的动画效果，也就是说不需要设置触发条件，特别适用于自动原型的效果，可在关键帧上设置并且修改css属性

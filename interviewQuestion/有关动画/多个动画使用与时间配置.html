@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-color: #34495E;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        main{
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ddd;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background: #f1c40f;
+            animation-name: translate,bg,radius;
+            animation-duration: 4s,2s,1s;  /*背景是2s内走完，就是在右下角的时候颜色变换完成,radius如果没有设置动画时间，会默认使用第一个动画的时间，也就是4s*/
+            animation-iteration-count: 2,1,1; /* 控制动画的次数,radius没有设置次数的话，也会默认使用第一个动画次数 */
+        }
+        /* 1、from动画开始:0%，to动画结束100%
+            2、帧动画与帧的百分比设置顺序无关
+            3、0%如果不写，那么使用的是元素的初始状态（目前这么理解，暂不涉及延迟）
+            4、100%不写，使用的也是元素的初始状态（目前这么理解，暂不涉及延迟）
+            5、以下的例子，0%和100%明显是多余的了(使用默认的样式)
+        */
+        @keyframes translate{
+           
+            25%{
+                transform: translateX(300px);
+            }
+            50%{
+                transform: translate(300px,300px);
+            }
+            75%{
+                transform: translateY(300px);
+            }
+          
+        }
+        @keyframes bg{
+           25%{
+               background:rgb(236, 31, 192)
+           }
+           50%{
+            background:rgb(109, 31, 236)
+           }
+           75%{
+            background:rgb(134, 209, 14)
+           }
+         
+       }
+       @keyframes radius{
+           25%{
+            border-radius:50%
+           }
+           50%{
+            border-radius:0%
+           }
+           75%{
+            border-radius:50%
+           }
+       }
+
+    </style>
+</head>
+<body>
+    <main>
+        <div></div>
+    </main>
+</body>
+</html>

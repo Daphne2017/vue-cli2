@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="cas" width="600px" height="500px">您的浏览器不支持canvas,请升级您的浏览器</canvas>
+    <button id="btn-dir-left">←</button>
+    <button id="btn-dir-right">→</button>
+    <button id="btn-dir-up">↑</button>
+    <button id="btn-dir-down">↓</button>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            margin: 20px;
+        }
+
+        button {
+            width: 30px;
+            height: 25px;
+            margin: 5px;
+        }
+    </style>
+    <script>
+        let cas = document.querySelector("#cas")
+        let ctx = cas.getContext('2d')
+
+        // 控制裁剪图片的 Y 坐标间接控制方向
+        let dirIndex = 0
+        let timer = null
+        let img = new Image()
+        img.src = "https://user-gold-cdn.xitu.io/2019/1/16/16855fe9b908c9af?w=160&h=260&f=png&s=5138"
+
+        img.onload = function () {
+
+            // 用来控制裁剪图片的 X 坐标
+            let xIndex = 0
+            step = (timestamp, elapsed) => {
+                if (elapsed > 1000 / 10) {
+                    // 清除之前的画布
+                    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+                    ctx.drawImage(
+                        img, // 160 * 260
+                        xIndex * 40, // 剪切图片的 x 坐标
+                        dirIndex * 65,
+                        40, // 剪切图像的宽度
+                        65,
+                        240, // 显示在画布位置的 x 坐标
+                        150,
+                        40, // 要使用的图像的宽度
+                        65 // 高度
+                    )
+                    xIndex++
+                    xIndex %= 4
+                    elapsed = 0
+                }
+
+                requestAnimationFrame(
+                    _timestamp => step(_timestamp, elapsed + _timestamp - timestamp)
+                )
+            }
+
+            requestAnimationFrame(timestamp => step(timestamp, 0))
+
+        }
+
+        // 改变方向 通过图像的 y 坐标
+        /*    =====绑定点击事件======== */
+        document.querySelector("#btn-dir-left").onclick = function () {
+            dirIndex = 1;
+        }
+        document.querySelector("#btn-dir-right").onclick = function () {
+            dirIndex = 2;
+        }
+        document.querySelector("#btn-dir-up").onclick = function () {
+            dirIndex = 3;
+        }
+        document.querySelector("#btn-dir-down").onclick = function () {
+            dirIndex = 0;
+        }
+    </script>
+</body>
+
+</html>
+<!-- https://blog.csdn.net/weixin_34080571/article/details/91461772 自定义控制帧速 -->
+
+在用@keyframes创建动画时，用百分比控制时间段，其中0%和100%是开头和结尾，其中可以用百分比增加更加复杂的动画，那么问题来了，其中能用到的最小百分比是几位？
+
+@keframes dong {
+    0%{
+        ...
+    }
+    50.00001%{
+        ...
+        }
+    100%{
+        ...
+        }
+}
+这个50%后的小数点能精确到多少位合法？各个现代浏览器中对这个位数的支持情况都是多少，有没有区别？
+其实我是想保证动画间的流畅性
+
+根本没有意义太精确。通常屏幕刷新率是 60Hz，也就是说两帧之间 16.7ms。假设你的 animation-duration 是 2s 的话，16.7ms 也就是 0.83% 而已，所以精确到 0.1% 完全足够了。
+Sea:
+keyframes-selector：动画持续时间的百分比
+
+Sea:
+是动画持续时间的百分比
+
+Sea:
+你在animate中调用它的时候给了时间，这个百分比就是那个时间的百分比，从0%-30%-50%-80%-100%-0%...循环
+
+要在什么时间点内到达什么位置

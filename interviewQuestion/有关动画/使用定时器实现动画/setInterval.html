@@ -1,0 +1,29 @@
+setInterval
+setInterval 是 JS 中的一个定时器, 用于重复调用一个函数或执行一个代码段，在每次调用之间具有固定的时间延迟
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style>
+      #div{
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      text-align: center;
+      line-height: 100px;
+    }
+    </style>
+</head>
+<body>
+<div id="div">10</div>
+<script>
+  const div = document.getElementById('div')
+  let text = parseInt(div.innerText)
+  let timeId = setInterval(()=>{
+   div.innerText = text--
+   if(text < 0) clearInterval(timeId)
+  },1000)
+</script>
+</body>
+</html>

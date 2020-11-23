@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<canvas id="cas" width="600px" height="500px">您的浏览器不支持canvas,请升级您的浏览器</canvas>
+<button id="btn-dir-left">←</button>
+<button id="btn-dir-right">→</button>
+<button id="btn-dir-up">↑</button>
+<button id="btn-dir-down">↓</button>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+canvas {
+    border: 1px solid #ccc;
+    margin: 20px;
+}
+button {
+    width: 30px;
+    height: 25px;
+    margin: 5px;
+}
+
+</style>
+<script>
+    let cas = document.querySelector("#cas")
+let ctx = cas.getContext('2d')
+
+// 控制裁剪图片的 Y 坐标间接控制方向
+let dirIndex = 0
+let timer = null
+let img = new Image()
+img.src = "https://user-gold-cdn.xitu.io/2019/1/16/16855fe9b908c9af?w=160&h=260&f=png&s=5138"
+
+img.onload = function() {
+    // 用来控制裁剪图片的 X 坐标
+    let xIndex = 0
+    step = (timestamp, elapsed) => {
+        // 清除之前的画布
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+            ctx.drawImage(
+                img, // 160 * 260
+                xIndex * 40, // 剪切图片的 x 坐标
+                dirIndex * 65,
+                40, // 剪切图像的宽度
+                65,
+                240, // 显示在画布位置的 x 坐标
+                150,
+                40, // 要使用的图像的宽度
+                65 // 高度
+            )
+        xIndex ++
+        xIndex %= 4
+    
+        requestAnimationFrame(step)
+}
+ 
+requestAnimationFrame(step)
+
+}
+
+// 改变方向 通过图像的 y 坐标
+/*    =====绑定点击事件======== */
+document.querySelector("#btn-dir-left").onclick = function(){
+    dirIndex = 1;
+}
+document.querySelector("#btn-dir-right").onclick = function(){
+    dirIndex = 2;
+}
+document.querySelector("#btn-dir-up").onclick = function(){
+    dirIndex = 3;
+}
+document.querySelector("#btn-dir-down").onclick = function(){
+    dirIndex = 0;
+}
+</script>
+</body>
+</html>

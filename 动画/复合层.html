@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<body>
+  <div style="transform:translateZ(200px); width: 200px;">
+    我是使用了css的3d属性，我升级为一个复合层了
+  </div>
+  <div style="position: absolute;left: 400px;  width: 200px; z-index: 999;">
+     我是absolute布局，虽然我脱离了文档流，并且我的z-index是999，但我还是属于默认复合层
+  </div>
+  <div>我属于默认复合层</div>
+</body>
+</html>

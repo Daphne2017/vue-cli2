@@ -1,0 +1,25 @@
+<script>
+    
+var fps = 1
+var fpsInterval = 1000 / fps  // 设置多少秒刷新一次，fps默认是60,1000/60约等于16.66ms一次
+var last = new Date().getTime() //上次执行的时刻
+ 
+function animate() {
+ 
+    requestAnimationFrame(animate);
+    // 执行时的时间
+    var now = new Date().getTime()
+    var elapsed = now - last;
+    // console.log(elapsed);
+    // 经过了足够的时间
+
+    if (elapsed > fpsInterval) {
+        console.log(1111, elapsed % fpsInterval);
+        last = now - (elapsed % fpsInterval); //校正当前时间
+        console.log('last',last);
+        // 循环的代码
+        // drawSomething()
+    }
+}
+animate()
+</script>

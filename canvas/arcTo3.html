@@ -15,33 +15,31 @@
 <script>
 // https://www.jb51.net/html5/70318.html arc,脚本之家，解说详细的网址
 // fill() 方法会闭合路径
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
-	canvas.width = 500
-	canvas.height = 500
-	var x0=400,
-	y0=400,
-	x1 = 500,
-	y1 = 400,
-	x2 = 450,
-	y2 = 450;
+	const canvas = document.getElementById('canvas');
+	const ctx = canvas.getContext('2d');
+	canvas.width = 700;
+	canvas.height = 500;
+	const x0 = 100,y0 = 200,
+	x1 = 500, y1 = 200,
+	x2 = 450,  y2 = 250;
+	ctx.fillText('x0,y0(100,200)',x0,y0-10)
 	ctx.beginPath();
 	ctx.moveTo(x0,y0);
 	ctx.strokeStyle = "red";
-	ctx.lineWidth = 8;
+	ctx.lineWidth = 2;
 	ctx.arcTo(x1,y1,x2,y2,100);
-	ctx.fillStyle = "#FEDEB4"
-	// ctx.stroke();
-	ctx.fill() // 如果路径未关闭，那么 fill() 方法会从路径结束点到开始点之间添加一条线，以关闭该路径（正如 closePath() 一样），然后填充该路径
+	ctx.stroke();
+		// ctx.fill() // 如果路径未关闭，那么 fill() 方法会从路径结束点到开始点之间添加一条线，以关闭该路径（正如 closePath() 一样），然后填充该路径
 
+		
 	ctx.beginPath();
-	ctx.strokeStyle = "rgba(0,0,0,0.5)";
+	ctx.strokeStyle = "gray";
 	ctx.lineWidth = 1;
 	ctx.moveTo(x0,y0);
 	ctx.lineTo(x1,y1);
-	ctx.fillText('x1,y1',x1+10,y1+10)
+	ctx.fillText('x1,y1(500,200)',x1-10,y1-10)
 	ctx.lineTo(x2,y2);
-	ctx.fillText('x2,y2',x2+10,y2)
+	ctx.fillText('x2,y2(450,250)',x2+10,y2)
 	ctx.stroke();
 </script>
 
@@ -63,7 +61,7 @@
 	当然，实际上他们还是相切的，因为切线是无限延长的。
 	我们继续探索，把圆继续变大，把起点与第1点的距离缩短。
 
-	var x0=400; //起点x坐标从100变400
+	const x0=400; //起点x坐标从100变400
 	...
 	ctx.arcTo(x1,y1,x2,y2,100); //圆的半径变大到100然后你就会看到这么个奇特的图形。
 
@@ -74,7 +72,7 @@
 	从图中我们可以看到，(x2,y2)这个点的坐标可以无限变化，只要他始终是切线上的一个点，那么在圆的半径不变的情况下，arcTo画出的图形不会有任何变化。这点需要特别注意。
 	让我用我拿不上台面的几何知识来验证下这个命题吧。为了方便计算，我先把两条线的夹角改成90度。
 
-	var x0=100,
+	const x0=100,
 	y0=400,
 	x1 = 500,
 	y1 = 400,

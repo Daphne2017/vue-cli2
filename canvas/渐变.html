@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id='drawing' style="border:1px solid #d3d3d3;"></canvas>
+</body>
+
+</html>
+<script>
+    let drawing = document.getElementById("drawing");
+    //设置画布的宽高
+    drawing.width = 640
+    drawing.height = 1136
+    // 确保浏览器支持<canvas>
+    if (drawing.getContext) {
+        let context = drawing.getContext("2d");
+        // let gradient = context.createLinearGradient(30, 30, 70, 70);
+        // gradient.addColorStop(0, "white");
+        // gradient.addColorStop(1, "black");
+        // // 绘制红色矩形
+        // context.fillStyle = "#ff0000";
+        // context.fillRect(10, 10, 50, 50);
+        // // 绘制渐变矩形
+        // context.fillStyle = gradient;
+        // context.fillRect(30, 30, 70, 70);
+
+        // context.fillStyle = gradient;
+        // context.fillRect(50, 50, 50, 50);
+        let gradient = context.createRadialGradient(55, 55, 10, 55, 55, 30);
+        gradient.addColorStop(0, "white");
+        gradient.addColorStop(1, "black");
+        // 绘制红色矩形
+        context.fillStyle = "#ff0000";
+        context.fillRect(10, 10, 50, 50);
+        // 绘制渐变矩形
+        context.fillStyle = gradient;
+        context.fillRect(30, 30, 50, 50);
+
+    }
+</script>
