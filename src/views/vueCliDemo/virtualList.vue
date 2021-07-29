@@ -41,7 +41,7 @@ export default {
     list (val) {
       const valLen = val.length
       this.allHeight = valLen * document.getElementsByClassName('item')[0].offsetHeight
-      this.paddingBottom = this.allHeight - this.$refs.container.clientHeight  // 初始化的padding-bottom
+      this.paddingBottom = this.allHeight - this.$refs.container.clientHeight // 初始化的padding-bottom
     }
   },
   methods: {
@@ -59,17 +59,17 @@ export default {
   },
   mounted () {
     const container = this.$refs.container
-    this.endIndex = this.startIndex +  Math.floor(container.clientHeight / document.getElementsByClassName('item')[0].offsetHeight)
+    this.endIndex = this.startIndex + Math.floor(container.clientHeight / document.getElementsByClassName('item')[0].offsetHeight)
     container.addEventListener('scroll', () => {
       const top = container.scrollTop
       this.startIndex = Math.floor(top / document.getElementsByClassName('item')[0].offsetHeight) // 开始位置
-      this.endIndex = this.startIndex +  Math.floor(container.clientHeight / document.getElementsByClassName('item')[0].offsetHeight)
+      this.endIndex = this.startIndex + Math.floor(container.clientHeight / document.getElementsByClassName('item')[0].offsetHeight)
       this.paddingTop = top
       if (this.endIndex >= this.list.length) {
         this.paddingBottom = 0
         return
       }
-      this.paddingBottom = this.allHeight - container.clientHeight  - top //
+      this.paddingBottom = this.allHeight - container.clientHeight - top //
     })
   }
 }
