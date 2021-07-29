@@ -1,11 +1,12 @@
 <template>
   <div class="tipsBox">
-    <button @click="add">增加</button>
+   <div style="position: absolute;left: 331px;top: 205px;">list长度：{{ list.length }}</div>
     <div class="container" ref="container">
         <div class="scroll-wrapper" :style="style">
-            <div v-for="(item, index) in scrollList" :key="index" class="item">{{item}}</div>
+            <div v-for="(item, index) in scrollList" :key="index" class="item" >{{`item-${item}`}}</div>
         </div>
     </div>
+     <button @click="add" style="position: absolute;top: 239px;left: 143px;">每点击一次增加1000条数据</button>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
   data () {
     return {
       list: [
+        0
       ],
       startIndex: 0,
       endIndex: 7,
@@ -38,13 +40,13 @@ export default {
   watch: {
     list (val) {
       const valLen = val.length
-      this.allHeight = valLen * 30
-      this.paddingBottom = this.allHeight - 210 // 初始化的padding-bottom
+      this.allHeight = valLen * document.getElementsByClassName('item')[0].offsetHeight
+      this.paddingBottom = this.allHeight - this.$refs.container.clientHeight  // 初始化的padding-bottom
     }
   },
   methods: {
     add () {
-      let arr = new Array(500).fill(0)
+      let arr = new Array(1000).fill(0)
       arr = arr.map((item, index) => {
         return index + this.list.length
       })
@@ -53,20 +55,21 @@ export default {
         ...arr
       ]
     }
+
   },
   mounted () {
     const container = this.$refs.container
+    this.endIndex = this.startIndex +  Math.floor(container.clientHeight / document.getElementsByClassName('item')[0].offsetHeight)
     container.addEventListener('scroll', () => {
       const top = container.scrollTop
-      this.startIndex = Math.floor(top / 30)
-      this.endIndex = this.startIndex + 7
-
+      this.startIndex = Math.floor(top / document.getElementsByClassName('item')[0].offsetHeight) // 开始位置
+      this.endIndex = this.startIndex +  Math.floor(container.clientHeight / document.getElementsByClassName('item')[0].offsetHeight)
       this.paddingTop = top
       if (this.endIndex >= this.list.length) {
         this.paddingBottom = 0
         return
       }
-      this.paddingBottom = this.allHeight - 210 - top //
+      this.paddingBottom = this.allHeight - container.clientHeight  - top //
     })
   }
 }
@@ -75,7 +78,7 @@ export default {
 <style lang="less" scoped>
   .container {
       width: 300px;
-      height: 210px;
+      height: 600px;
       overflow: auto;
       border: 1px solid;
       margin: 100px auto;
