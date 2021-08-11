@@ -76,6 +76,10 @@ export default {
         {
           link: 'canvasCard',
           name: 'canvas画图'
+        },
+        {
+          link: 'directives',
+          name: '指令'
         }
       ]
     }

@@ -105,6 +105,14 @@ export default [
         meta: {
           title: '图片上传'
         }
+      },
+      {
+        path: 'directives',
+        name: 'directives',
+        component: resolve => require(['@/views/directives/index'], resolve),
+        meta: {
+          title: '使用指令'
+        }
       }
     ]
   }

@@ -37,8 +37,6 @@
 // Vue.prototype.$xx其实只不过是js中构造函数的显式原型的特性罢了:
 //  构造函数的显式原型的属性 / 方法, 在函数实例化后, 可以在任意实例上读取
 
-
-
 // 版本要求
 // AjaxPlugin在vux@^ 2.1.0 - rc.20开始支持
 // 引入
@@ -113,9 +111,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Mock from './mock' // 刚刚手写的mock.js文件
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import Directives from './directives'
 import axios from 'axios' // axios http请求库 //需要注意的是axios是基于Promise的，因此如果你需要兼容低版本浏览器(caniuse)，需要引入polyfill。
 import Qs from 'qs'
 import {
@@ -167,13 +165,13 @@ Vue.component('group', Group)
 Vue.component('popup-picker', PopupPicker)
 Vue.component('x-address', XAddress)
 Vue.directive('transfer-dom', TransferDom)
-
+Vue.use(Directives)
 Vue.config.productionTip = false
 
 // axios.defaults.baseURL = 'http://mockjs.com/api' // 设置默认请求的url
 Vue.prototype.$http = axios // //把 `axios` 加到 `Vue` 的原型中，在组件上可以直接使用this.$http访问替代 axios，
 Vue.prototype.$qs = Qs // 添加qs到vue的显式原型上，通过this.$http.qs来使用
-Vue.prototype.$echarts = echarts //全局引入echarts
+Vue.prototype.$echarts = echarts // 全局引入echarts
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -181,4 +179,3 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-
